@@ -552,17 +552,22 @@
 
             const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbysrpUCDEliWp3NruneHKrAqs3J2E4LkuOfK6hs53lCLB3hdqTAS5GchpXCAJqIhcMlqA/exec';
 
-fetch(WEB_APP_URL)
+            fetch(WEB_APP_URL)
                 .then(response => response.json())
                 .then(data => {
                     console.log("Fetched Calendar Data:", data);
                     if (!data.success || !data.events) return;
 
                     const events = data.events;
-                    const now = new Date();
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
 
-                    // Filter for future events only
-                    const futureEvents = events.filter(ev => new Date(ev.startTime) >= now);
+                    // Filter for today or future events with accurate day comparison
+                    const futureEvents = events.filter(ev => {
+                        const evDate = new Date(ev.startTime);
+                        evDate.setHours(0, 0, 0, 0);
+                        return evDate >= today;
+                    });
 
                     // 1. Render Announcement (Takes the very first upcoming event)
                     const announceContainer = document.getElementById('dynamic-announcement-container');
@@ -608,7 +613,7 @@ fetch(WEB_APP_URL)
                     // 2. Render Upcoming Activities (Takes the rest after the first one)
                     const eventsContainer = document.getElementById('dynamic-events-container');
                     if (eventsContainer) {
-                        const remainingEvents = futureEvents.slice(1, 5); // Takes up to 4 events after the first one
+                        const remainingEvents = futureEvents.slice(1, 5);
 
                         if (remainingEvents.length > 0) {
                             eventsContainer.innerHTML = remainingEvents.map(ev => {
