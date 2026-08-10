@@ -551,6 +551,7 @@
             };
 
             const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbysrpUCDEliWp3NruneHKrAqs3J2E4LkuOfK6hs53lCLB3hdqTAS5GchpXCAJqIhcMlqA/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbysrpUCDEliWp3NruneHKrAqs3J2E4LkuOfK6hs53lCLB3hdqTAS5GchpXCAJqIhcMlqA/exec';
 
             fetch(WEB_APP_URL)
                 .then(response => response.json())
@@ -559,19 +560,10 @@
                     if (!data.success || !data.events) return;
 
                     const events = data.events;
-                    const today = new Date();
-                    today.setHours(0, 0, 0, 0);
 
-                    // Filter for today or future events with accurate day comparison
-                    const futureEvents = events.filter(ev => {
-                        const evDate = new Date(ev.startTime);
-                        evDate.setHours(0, 0, 0, 0);
-                        return evDate >= today;
-                    });
-
-                    // 1. Render Announcement (Takes the very first upcoming event)
+                    // 1. Render Announcement (Takes the very first event available)
                     const announceContainer = document.getElementById('dynamic-announcement-container');
-                    const announcementEvent = futureEvents.length > 0 ? futureEvents[0] : null;
+                    const announcementEvent = events.length > 0 ? events[0] : null;
 
                     if (announceContainer && announcementEvent) {
                         const evDate = new Date(announcementEvent.startTime);
@@ -610,10 +602,10 @@
                         announceContainer.innerHTML = `<p class="text-xs text-gray-400 italic">Tiada pengumuman rasmi buat masa ini.</p>`;
                     }
 
-                    // 2. Render Upcoming Activities (Takes the rest after the first one)
+                    // 2. Render Upcoming Activities (Takes all remaining events)
                     const eventsContainer = document.getElementById('dynamic-events-container');
                     if (eventsContainer) {
-                        const remainingEvents = futureEvents.slice(1, 5);
+                        const remainingEvents = events.slice(1); // Takes all events after the first one
 
                         if (remainingEvents.length > 0) {
                             eventsContainer.innerHTML = remainingEvents.map(ev => {
@@ -644,6 +636,7 @@
                     }
                 })
                 .catch(err => console.error('Error fetching dynamic calendar feed:', err));
+
         });
     </script>
 </body>
