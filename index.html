@@ -555,6 +555,7 @@
             fetch(WEB_APP_URL)
                 .then(response => response.json())
                 .then(data => {
+                    console.log("Fetched Calendar Data:", data);
                     if (!data.success || !data.events) return;
 
                     const events = data.events;
