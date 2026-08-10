@@ -552,7 +552,7 @@
 
             const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbysrpUCDEliWp3NruneHKrAqs3J2E4LkuOfK6hs53lCLB3hdqTAS5GchpXCAJqIhcMlqA/exec';
 
-            fetch(WEB_APP_URL)
+fetch(WEB_APP_URL)
                 .then(response => response.json())
                 .then(data => {
                     console.log("Fetched Calendar Data:", data);
@@ -561,22 +561,13 @@
                     const events = data.events;
                     const now = new Date();
 
-                    // 1. Define Date Windows
-                    const announceStart = new Date(now.getFullYear(), now.getMonth() - 2, 1);
-                    const announceEnd = new Date(now.getFullYear(), now.getMonth() + 2, 0);
+                    // Filter for future events only
+                    const futureEvents = events.filter(ev => new Date(ev.startTime) >= now);
 
-                    // 2. Filter & Select PENGUMUMAN TERKINI (Announcement)
-                    let announcementEvent = events.find(ev => {
-                        const evDate = new Date(ev.startTime);
-                        return evDate >= announceStart && evDate <= announceEnd;
-                    });
-
-                    if (!announcementEvent && events.length > 0) {
-                        announcementEvent = events.find(ev => new Date(ev.startTime) >= now) || events[0];
-                    }
-
-                    // Render Announcement
+                    // 1. Render Announcement (Takes the very first upcoming event)
                     const announceContainer = document.getElementById('dynamic-announcement-container');
+                    const announcementEvent = futureEvents.length > 0 ? futureEvents[0] : null;
+
                     if (announceContainer && announcementEvent) {
                         const evDate = new Date(announcementEvent.startTime);
                         const dateString = evDate.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -614,18 +605,13 @@
                         announceContainer.innerHTML = `<p class="text-xs text-gray-400 italic">Tiada pengumuman rasmi buat masa ini.</p>`;
                     }
 
-                    // 3. Filter & Render AKTIVITI AKAN DATANG (Upcoming Activities - Deduplicated)
+                    // 2. Render Upcoming Activities (Takes the rest after the first one)
                     const eventsContainer = document.getElementById('dynamic-events-container');
                     if (eventsContainer) {
-                        const futureEvents = events.filter(ev => {
-                            const evDate = new Date(ev.startTime);
-                            const isFuture = evDate >= now;
-                            const isNotAnnouncement = announcementEvent ? ev.id !== announcementEvent.id : true;
-                            return isFuture && isNotAnnouncement;
-                        }).slice(0, 4);
+                        const remainingEvents = futureEvents.slice(1, 5); // Takes up to 4 events after the first one
 
-                        if (futureEvents.length > 0) {
-                            eventsContainer.innerHTML = futureEvents.map(ev => {
+                        if (remainingEvents.length > 0) {
+                            eventsContainer.innerHTML = remainingEvents.map(ev => {
                                 const evDate = new Date(ev.startTime);
                                 const dayNum = evDate.getDate();
                                 const monthShort = evDate.toLocaleDateString('ms-MY', { month: 'short' }).toUpperCase();
