@@ -150,7 +150,7 @@
                 <div class="hidden lg:flex items-center space-x-8">
                     <a href="#" class="nav-link text-sm font-semibold text-white transition-colors">UTAMA</a>
                     <a href="#quick-access" class="nav-link text-sm font-semibold text-gray-200 hover:text-white transition-colors">WORKSPACE</a>
-                    <a href="#events-section" class="nav-link text-sm font-semibold text-gray-200 hover:text-white transition-colors">TAKWIM</a>
+                    <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="nav-link text-sm font-semibold text-gray-200 hover:text-white transition-colors">TAKWIM</a>
                     <a href="#gallery-section" class="nav-link text-sm font-semibold text-gray-200 hover:text-white transition-colors">GALERI</a>
                 </div>
 
@@ -168,7 +168,7 @@
             <div class="px-4 py-6 space-y-3">
                 <a href="#" class="block px-4 py-3 rounded-lg text-sm font-bold text-white bg-white/15">UTAMA</a>
                 <a href="#quick-access" class="block px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5">WORKSPACE</a>
-                <a href="#events-section" class="block px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5">TAKWIM</a>
+                <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="block px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5">TAKWIM</a>
                 <a href="#gallery-section" class="block px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5">GALERI</a>
             </div>
         </div>
@@ -215,9 +215,9 @@
                         <span>Akses Dokumen</span>
                     </a>
                     <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="w-full sm:w-auto bg-transparent border-2 border-white/30 hover:border-white text-white font-semibold py-3.5 px-8 rounded-lg transition-all duration-300 flex items-center justify-center gap-3">
-    <i class="far fa-calendar-alt text-lg"></i>
-    <span>Takwim Tahunan</span>
-</a>
+                        <i class="far fa-calendar-alt text-lg"></i>
+                        <span>Takwim Tahunan</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -237,37 +237,99 @@
                         <h3 class="text-xl font-bold text-main uppercase tracking-wide">PENGUMUMAN TERKINI</h3>
                     </div>
                     
-                    <!-- Announcement Content Block (dynamic from Google Calendar) -->
-                    <div id="latest-announcement" class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+                    <!-- Announcement Content Block -->
+                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
                         <div class="flex items-center gap-3 mb-4">
                             <span class="bg-secondary text-primary text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">NEW</span>
-                            <h4 id="announcement-title" class="text-lg font-bold text-main">Memuatkan pengumuman...</h4>
+                            <h4 class="text-lg font-bold text-main">Mesyuarat AJK Bil.1/2026</h4>
                         </div>
-
+                        
                         <div class="space-y-2.5 text-sm text-gray-600 mb-6 font-medium">
                             <div class="flex items-center gap-3">
-                                <i class="far fa-calendar text-gray-400 w-4 text-center"></i>
-                                <span id="announcement-date">Sila tunggu...</span>
+                                <i class="far fa-calendar text-gray-400 w-4 text-center"></i> 
+                                <span>14 Ogos 2026 (Jumaat)</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <i class="far fa-clock text-gray-400 w-4 text-center"></i>
-                                <span id="announcement-time">Sila tunggu...</span>
+                                <i class="far fa-clock text-gray-400 w-4 text-center"></i> 
+                                <span>9.00 pagi</span>
                             </div>
                             <div class="flex items-start gap-3">
-                                <i class="fas fa-map-marker-alt text-gray-400 w-4 text-center mt-0.5"></i>
-                                <span id="announcement-location">Sila tunggu...</span>
+                                <i class="fas fa-map-marker-alt text-gray-400 w-4 text-center mt-0.5"></i> 
+                                <span>Bilik Mesyuarat SMKA (P) Al-Mashoor</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                            Semua AJK dijemput hadir. Kehadiran tuan/puan amat dihargai.
+                        </p>
+                        
+                        <button class="bg-primary hover:bg-primary-light text-white text-sm font-semibold py-2.5 px-6 rounded-lg transition-colors shadow-sm inline-flex items-center gap-2">
+                            <span>Lihat Maklumat Lanjut</span>
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Upcoming Events (Span 5) -->
+                <div id="events-section" class="lg:col-span-5 bg-surface rounded-3xl border border-border p-8 shadow-card hover-lift fade-in-up delay-100 flex flex-col h-full">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shadow-sm flex-shrink-0">
+                            <i class="far fa-calendar-check text-lg"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-main uppercase tracking-wide">AKTIVITI AKAN DATANG</h3>
+                    </div>
+                    
+                    <div class="space-y-4 flex-grow">
+                        <!-- Timeline Event 1 -->
+                        <div class="flex items-start gap-4 pb-4 border-b border-gray-100 last:border-0 last:pb-0 group">
+                            <div class="bg-primary rounded-xl text-center flex-shrink-0 w-14 overflow-hidden flex flex-col shadow-sm">
+                                <div class="text-white text-lg font-bold py-1 bg-primary leading-tight">29</div>
+                                <div class="text-primary-light text-[9px] font-bold uppercase tracking-wider bg-white py-1 border-t border-gray-100">JUL</div>
+                            </div>
+                            <div class="flex-grow pt-0.5">
+                                <h4 class="text-sm font-bold text-main mb-1">Mesyuarat AJK Bil.1/2026</h4>
+                                <p class="text-xs text-muted font-medium">9.00 pagi | Bilik Mesyuarat</p>
+                            </div>
+                            <div class="text-gray-300 pt-1">
+                                <i class="far fa-calendar-plus"></i>
                             </div>
                         </div>
 
-                        <p id="announcement-description" class="text-sm text-gray-600 mb-6 leading-relaxed">
-                            Memuatkan maklumat daripada Google Calendar...
-                        </p>
+                        <!-- Timeline Event 2 -->
+                        <div class="flex items-start gap-4 pb-4 border-b border-gray-100 last:border-0 last:pb-0 group">
+                            <div class="bg-green-600 rounded-xl text-center flex-shrink-0 w-14 overflow-hidden flex flex-col shadow-sm">
+                                <div class="text-white text-lg font-bold py-1 bg-green-600 leading-tight">15</div>
+                                <div class="text-green-700 text-[9px] font-bold uppercase tracking-wider bg-white py-1 border-t border-gray-100">OGOS</div>
+                            </div>
+                            <div class="flex-grow pt-0.5">
+                                <h4 class="text-sm font-bold text-main mb-1">Hari Kantin</h4>
+                                <p class="text-xs text-muted font-medium">8.00 pagi | Perkarangan Sekolah</p>
+                            </div>
+                            <div class="text-gray-300 pt-1">
+                                <i class="far fa-calendar-plus"></i>
+                            </div>
+                        </div>
 
-                        <a href="takwim.html" class="bg-primary hover:bg-primary-light text-white text-sm font-semibold py-2.5 px-6 rounded-lg transition-colors shadow-sm inline-flex items-center gap-2">
-                            <span>Lihat Takwim</span>
-                            <i class="fas fa-chevron-right text-xs"></i>
-                        </a>
+                        <!-- Timeline Event 3 -->
+                        <div class="flex items-start gap-4 pb-4 border-b border-gray-100 last:border-0 last:pb-0 group">
+                            <div class="bg-secondary rounded-xl text-center flex-shrink-0 w-14 overflow-hidden flex flex-col shadow-sm">
+                                <div class="text-white text-lg font-bold py-1 bg-secondary leading-tight">12</div>
+                                <div class="text-secondary-hover text-[9px] font-bold uppercase tracking-wider bg-white py-1 border-t border-gray-100">SEPT</div>
+                            </div>
+                            <div class="flex-grow pt-0.5">
+                                <h4 class="text-sm font-bold text-main mb-1">Hari Anugerah Kecemerlangan</h4>
+                                <p class="text-xs text-muted font-medium">8.30 pagi | Dewan Sekolah</p>
+                            </div>
+                            <div class="text-gray-300 pt-1">
+                                <i class="far fa-calendar-plus"></i>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <div class="mt-6 text-right">
+                        <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-2">
+                            Lihat Takwim Penuh <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -282,7 +344,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- App Card 1: Drive -->
-                <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="bg-surface rounded-2xl border border-border p-6 flex flex-col justify-start shadow-sm hover:shadow-card hover-lift group fade-in-up delay-100">
+                <a href="https://drive.google.com/drive/folders/18EMOWLL0l2R7Dk52XvPq1Vw7vdpB_Fwz?usp=sharing" target="_blank" rel="noopener noreferrer" class="bg-surface rounded-2xl border border-border p-6 flex flex-col justify-start shadow-sm hover:shadow-card hover-lift group fade-in-up delay-100">
                     <div class="flex justify-between items-start mb-4">
                         <div class="w-12 h-12 flex items-center justify-center">
                             <svg viewBox="0 0 87.3 78" class="w-10 h-10"><path d="m6.6 66.85 22.35 43.35C31.2 114.1 35.5 118 40.5 118h46.6c5 0 9.3-3.9 11.55-7.8l22.35-43.35c2.25-3.9 2.25-11.7 0-15.6L98.65 7.9C96.4 4 92.1.1 87.1.1H40.5c-5 0-9.3 3.9-11.55 7.8L6.6 51.25c-2.25 3.9-2.25 11.7 0 15.6z" fill="#000000" fill-opacity="0"/><path d="m43.65 24-21 36.45L5.5 30.65C2.9 26 4.75 20.1 9.3 17.5l22-12.7c4.6-2.6 10.4-1 13 3.6z" fill="#FFC107"/><path d="m60.7 53.6-21.2-36.8c-2.6-4.6-1.1-10.5 3.5-13.1l22-12.7c4.6-2.6 10.4-1.1 13 3.5L99.2 31.4z" fill="#1976D2"/><path d="M79.2 53.6H37.3c-5.2 0-9.6 2.8-12.2 7.3L7.9 90.6C5.3 95.2 6.8 101.1 11.4 103.7l22 12.7c2.6 1.5 5.7 1.8 8.5.8 1.8-.7 3.4-1.9 4.5-3.6l17.2-29.8h28.1c5.2 0 8.3-5.4 5.7-10l-11-19.1c-2.5-4.4-7-7-12.2-7z" fill="#4CAF50"/></svg>
@@ -294,7 +356,7 @@
                 </a>
 
                 <!-- App Card 2: Calendar -->
-                <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="bg-surface rounded-2xl border border-border p-6 flex flex-col justify-start shadow-sm hover:shadow-card hover-lift group fade-in-up delay-200">
+                <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="bg-surface rounded-2xl border border-border p-6 flex flex-col justify-start shadow-sm hover:shadow-card hover-lift group fade-in-up delay-200">
                     <div class="flex justify-between items-start mb-4">
                         <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
                             <i class="far fa-calendar-alt text-2xl"></i>
@@ -473,8 +535,11 @@
         document.addEventListener('DOMContentLoaded', () => {
             const nav = document.getElementById('main-nav');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) nav.classList.add('scrolled');
-                else nav.classList.remove('scrolled');
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
             });
 
             const btn = document.getElementById('mobile-menu-btn');
@@ -500,7 +565,11 @@
                 });
             });
 
-            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -511,160 +580,47 @@
                 });
             }, observerOptions);
 
-            document.querySelectorAll('.fade-in-up').forEach(element => observer.observe(element));
+            document.querySelectorAll('.fade-in-up').forEach((element) => {
+                observer.observe(element);
+            });
 
             const counterObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-                    const counter = entry.target;
-                    const target = +counter.getAttribute('data-target');
-                    const duration = 1500;
-                    const increment = target / (duration / 16);
-                    let current = 0;
-
-                    const updateCounter = () => {
-                        current += increment;
-                        if (current < target) {
-                            counter.innerText = Math.ceil(current);
-                            requestAnimationFrame(updateCounter);
-                        } else {
-                            counter.innerText = target;
-                        }
-                    };
-
-                    updateCounter();
-                    observer.unobserve(counter);
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = +counter.getAttribute('data-target');
+                        const duration = 1500;
+                        const increment = target / (duration / 16);
+                        
+                        let current = 0;
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        updateCounter();
+                        observer.unobserve(counter);
+                    }
                 });
             }, observerOptions);
 
-            document.querySelectorAll('.counter').forEach(counter => counterObserver.observe(counter));
-
+            document.querySelectorAll('.counter').forEach(counter => {
+                counterObserver.observe(counter);
+            });
+            
             const WORKSPACE_CONFIG = {
-                driveUrl: "https://drive.google.com",
-                calendarUrl: "https://calendar.google.com",
+                driveUrl: "https://drive.google.com/drive/folders/18EMOWLL0l2R7Dk52XvPq1Vw7vdpB_Fwz?usp=sharing",
+                calendarUrl: "https://pibgsemashoor.github.io/pibg-portal/takwim.html",
                 formsUrl: "https://forms.google.com",
                 sheetsUrl: "https://sheets.google.com",
                 docsUrl: "https://docs.google.com",
                 photosUrl: "https://photos.google.com",
                 meetUrl: "https://meet.google.com"
             };
-
-            /* =========================================================
-               GOOGLE CALENDAR - LATEST ANNOUNCEMENT
-               Replace the placeholder API key below with your key.
-               Keep the key restricted to Google Calendar API and
-               restricted to your GitHub Pages website referrer.
-               ========================================================= */
-            const CALENDAR_ID = '43e05a5a72ef6696289cfba03110e4a0efcd845a45a64fc7f2f6341bf4e0a5149@group.calendar.google.com';
-            const API_KEY = 'YOUR_GOOGLE_CALENDAR_API_KEY';
-
-            const titleEl = document.getElementById('announcement-title');
-            const dateEl = document.getElementById('announcement-date');
-            const timeEl = document.getElementById('announcement-time');
-            const locationEl = document.getElementById('announcement-location');
-            const descriptionEl = document.getElementById('announcement-description');
-
-            const formatDate = (date) => new Intl.DateTimeFormat('ms-MY', {
-                timeZone: 'Asia/Kuala_Lumpur',
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            }).format(date);
-
-            const formatTime = (date) => new Intl.DateTimeFormat('ms-MY', {
-                timeZone: 'Asia/Kuala_Lumpur',
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true
-            }).format(date).replace('AM', 'pagi').replace('PM', 'petang');
-
-            const eventStart = (event) => {
-                if (event.start?.dateTime) return new Date(event.start.dateTime);
-                if (event.start?.date) return new Date(`${event.start.date}T00:00:00+08:00`);
-                return null;
-            };
-
-            const eventEnd = (event) => {
-                if (event.end?.dateTime) return new Date(event.end.dateTime);
-                if (event.end?.date) return new Date(`${event.end.date}T23:59:59+08:00`);
-                return null;
-            };
-
-            const loadLatestAnnouncement = async () => {
-                if (!API_KEY || API_KEY === 'YOUR_GOOGLE_CALENDAR_API_KEY') {
-                    titleEl.textContent = 'Konfigurasi Calendar diperlukan';
-                    dateEl.textContent = 'API key belum dimasukkan';
-                    timeEl.textContent = '-';
-                    locationEl.textContent = '-';
-                    descriptionEl.textContent = 'Masukkan Google Calendar API key yang telah dicipta ke dalam index.html.';
-                    return;
-                }
-
-                try {
-                    const now = new Date();
-                    const params = new URLSearchParams({
-                        key: API_KEY,
-                        timeMin: now.toISOString(),
-                        singleEvents: 'true',
-                        orderBy: 'startTime',
-                        maxResults: '10'
-                    });
-
-                    const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?${params.toString()}`;
-                    const response = await fetch(url, { cache: 'no-store' });
-
-                    if (!response.ok) {
-                        throw new Error(`Calendar API HTTP ${response.status}`);
-                    }
-
-                    const data = await response.json();
-
-                    const upcoming = (data.items || [])
-                        .filter(event => event.status !== 'cancelled')
-                        .map(event => ({ event, start: eventStart(event), end: eventEnd(event) }))
-                        .filter(item => item.start && (!item.end || item.end >= now))
-                        .sort((a, b) => a.start - b.start);
-
-                    if (!upcoming.length) {
-                        titleEl.textContent = 'Tiada pengumuman akan datang';
-                        dateEl.textContent = '-';
-                        timeEl.textContent = '-';
-                        locationEl.textContent = '-';
-                        descriptionEl.textContent = 'Tiada aktiviti atau mesyuarat akan datang dalam takwim PIBG.';
-                        return;
-                    }
-
-                    const { event, start, end } = upcoming[0];
-
-                    titleEl.textContent = event.summary || 'Pengumuman PIBG';
-                    dateEl.textContent = formatDate(start);
-
-                    if (event.start?.date) {
-                        timeEl.textContent = 'Sepanjang hari';
-                    } else if (end) {
-                        timeEl.textContent = `${formatTime(start)} – ${formatTime(end)}`;
-                    } else {
-                        timeEl.textContent = formatTime(start);
-                    }
-
-                    locationEl.textContent = event.location || 'Lokasi akan dimaklumkan';
-
-                    const description = (event.description || '').replace(/\s+/g, ' ').trim();
-                    descriptionEl.textContent = description
-                        ? description.substring(0, 180) + (description.length > 180 ? '…' : '')
-                        : 'Maklumat lanjut boleh dirujuk melalui takwim PIBG.';
-                } catch (error) {
-                    console.error('Google Calendar announcement error:', error);
-                    titleEl.textContent = 'Pengumuman Terkini';
-                    dateEl.textContent = 'Tidak dapat dimuatkan';
-                    timeEl.textContent = '-';
-                    locationEl.textContent = '-';
-                    descriptionEl.textContent = 'Maklumat takwim tidak dapat dimuatkan buat sementara waktu. Sila semak halaman Takwim.';
-                }
-            };
-
-            loadLatestAnnouncement();
         });
     </script>
 </body>
