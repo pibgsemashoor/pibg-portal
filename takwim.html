@@ -1,938 +1,112 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Takwim PIBG - SMKA (P) Al-Mashoor</title>
-    <meta name="description" content="Takwim rasmi PIBG SMKA (P) Al-Mashoor.">
-
-    <!-- Google Font: SAME as main portal -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    >
-
-    <style>
-        /* =========================================================
-           PIBG SMKA (P) AL-MASHOOR
-           TAKWIM PAGE
-           SAME DESIGN SYSTEM AS MAIN PORTAL
-           ========================================================= */
-
-        :root {
-            --primary: #142952;
-            --primary-dark: #0a1733;
-            --primary-light: #1e3c75;
-
-            --secondary: #f6a735;
-            --secondary-hover: #e0952b;
-
-            --background: #F8FAFC;
-            --surface: #FFFFFF;
-            --border: #E5E7EB;
-
-            --text-main: #1F2937;
-            --text-muted: #6B7280;
-
-            --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
-            --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
-            --shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
-
-            --radius: 14px;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            min-height: 100vh;
-
-            background: var(--background);
-            color: var(--text-main);
-
-            font-family: 'Poppins', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-
-            overflow-x: hidden;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        /* =========================================================
-           NAVIGATION
-           ========================================================= */
-
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
-            width: 100%;
-
-            background: rgba(10, 23, 51, 0.97);
-            backdrop-filter: blur(12px);
-
-            border-bottom: 1px solid rgba(255,255,255,0.10);
-
-            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-        }
-
-        .navbar-inner {
-            max-width: 1280px;
-            margin: 0 auto;
-
-            min-height: 76px;
-
-            padding: 0 24px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 30px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-
-            color: white;
-
-            font-size: 17px;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-
-            white-space: nowrap;
-        }
-
-        .brand-icon {
-            width: 40px;
-            height: 40px;
-
-            border-radius: 10px;
-
-            background: var(--secondary);
-
-            color: var(--primary-dark);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 18px;
-
-            box-shadow: 0 4px 10px rgba(246,167,53,0.25);
-        }
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .brand-title {
-            line-height: 1.1;
-        }
-
-        .brand-subtitle {
-            margin-top: 3px;
-
-            color: var(--secondary);
-
-            font-size: 10px;
-            font-weight: 600;
-
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            display: inline-flex;
-            align-items: center;
-
-            padding: 10px 15px;
-
-            border-radius: 8px;
-
-            color: #D1D5DB;
-
-            font-size: 13px;
-            font-weight: 600;
-
-            transition: all 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: white;
-            background: rgba(255,255,255,0.07);
-        }
-
-        .nav-links a.active {
-            color: var(--primary-dark);
-            background: var(--secondary);
-
-            font-weight: 700;
-        }
-
-        /* =========================================================
-           HERO
-           SAME VISUAL LANGUAGE AS MAIN PORTAL
-           ========================================================= */
-
-        .hero {
-            position: relative;
-
-            min-height: 360px;
-
-            display: flex;
-            align-items: center;
-
-            overflow: hidden;
-
-            background: var(--primary);
-        }
-
-        .hero-image {
-            position: absolute;
-            inset: 0;
-
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-            object-position: center;
-
-            transform: scale(1.03);
-        }
-
-        /* Main portal style navy gradient */
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(20,41,82,0.98) 0%,
-                    rgba(20,41,82,0.88) 35%,
-                    rgba(20,41,82,0.55) 70%,
-                    rgba(20,41,82,0.35) 100%
-                );
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-
-            width: 100%;
-            max-width: 1280px;
-
-            margin: 0 auto;
-
-            padding: 70px 24px;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-
-            margin-bottom: 15px;
-
-            color: var(--secondary);
-
-            font-size: 13px;
-            font-weight: 700;
-
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-        }
-
-        .hero-badge i {
-            font-size: 12px;
-        }
-
-        .hero-title {
-            margin: 0;
-
-            color: white;
-
-            font-size: clamp(2.5rem, 6vw, 5rem);
-
-            font-weight: 800;
-            line-height: 1.02;
-
-            letter-spacing: -0.03em;
-
-            text-shadow: 0 4px 20px rgba(0,0,0,0.20);
-        }
-
-        .hero-title span {
-            color: var(--secondary);
-        }
-
-        .hero-description {
-            max-width: 720px;
-
-            margin: 20px 0 0;
-
-            color: rgba(255,255,255,0.82);
-
-            font-size: 15px;
-            line-height: 1.8;
-        }
-
-        /* =========================================================
-           MAIN CONTENT
-           ========================================================= */
-
-        .main {
-            max-width: 1280px;
-
-            margin: 0 auto;
-
-            padding: 45px 24px 60px;
-        }
-
-        .section-heading {
-            margin-bottom: 22px;
-        }
-
-        .section-label {
-            display: inline-block;
-
-            margin-bottom: 7px;
-
-            color: var(--secondary);
-
-            font-size: 12px;
-            font-weight: 700;
-
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-        }
-
-        .section-title {
-            margin: 0;
-
-            color: var(--primary);
-
-            font-size: clamp(1.5rem, 3vw, 2rem);
-
-            font-weight: 700;
-        }
-
-        .section-description {
-            margin: 8px 0 0;
-
-            color: var(--text-muted);
-
-            font-size: 14px;
-        }
-
-        /* =========================================================
-           CALENDAR CARD
-           ========================================================= */
-
-        .calendar-card {
-            background: var(--surface);
-
-            border: 1px solid var(--border);
-
-            border-radius: var(--radius);
-
-            overflow: hidden;
-
-            box-shadow: var(--shadow-card);
-        }
-
-        .calendar-toolbar {
-            min-height: 74px;
-
-            padding: 15px 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 15px;
-
-            border-bottom: 1px solid var(--border);
-
-            background: white;
-        }
-
-        .calendar-toolbar-title {
-            display: flex;
-            align-items: center;
-            gap: 11px;
-
-            color: var(--primary);
-
-            font-size: 15px;
-            font-weight: 700;
-        }
-
-        .calendar-icon {
-            width: 38px;
-            height: 38px;
-
-            border-radius: 10px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: rgba(246,167,53,0.14);
-
-            color: var(--secondary);
-
-            font-size: 16px;
-        }
-
-        .google-calendar-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-
-            padding: 10px 16px;
-
-            border-radius: 8px;
-
-            background: var(--primary);
-
-            color: white;
-
-            font-size: 12px;
-            font-weight: 600;
-
-            transition: all 0.2s ease;
-        }
-
-        .google-calendar-button:hover {
-            background: var(--primary-light);
-
-            transform: translateY(-1px);
-
-            box-shadow: var(--shadow-soft);
-        }
-
-        /* =========================================================
-           GOOGLE CALENDAR
-           ========================================================= */
-
-        .calendar-container {
-            width: 100%;
-
-            background: white;
-
-            min-height: 760px;
-        }
-
-        .calendar-container iframe {
-            display: block;
-
-            width: 100%;
-            height: 760px;
-
-            border: 0;
-
-            background: white;
-        }
-
-        /* =========================================================
-           INFO CARDS
-           ========================================================= */
-
-        .info-grid {
-            display: grid;
-
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 18px;
-
-            margin-top: 22px;
-        }
-
-        .info-card {
-            padding: 22px;
-
-            background: white;
-
-            border: 1px solid var(--border);
-
-            border-radius: var(--radius);
-
-            box-shadow: var(--shadow-soft);
-
-            transition: all 0.2s ease;
-        }
-
-        .info-card:hover {
-            transform: translateY(-2px);
-
-            box-shadow: var(--shadow-hover);
-        }
-
-        .info-icon {
-            width: 42px;
-            height: 42px;
-
-            margin-bottom: 13px;
-
-            border-radius: 10px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: rgba(20,41,82,0.07);
-
-            color: var(--primary);
-
-            font-size: 16px;
-        }
-
-        .info-card h3 {
-            margin: 0 0 6px;
-
-            color: var(--primary);
-
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .info-card p {
-            margin: 0;
-
-            color: var(--text-muted);
-
-            font-size: 12px;
-
-            line-height: 1.7;
-        }
-
-        /* =========================================================
-           FOOTER
-           ========================================================= */
-
-        .footer {
-            background: var(--primary-dark);
-
-            color: #CBD5E1;
-
-            text-align: center;
-
-            padding: 28px 20px;
-        }
-
-        .footer-title {
-            margin: 0 0 5px;
-
-            color: white;
-
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .footer-text {
-            margin: 0;
-
-            color: #94A3B8;
-
-            font-size: 11px;
-        }
-
-        /* =========================================================
-           RESPONSIVE
-           ========================================================= */
-
-        @media (max-width: 900px) {
-
-            .navbar-inner {
-                min-height: 68px;
-
-                padding: 0 16px;
-            }
-
-            .brand {
-                font-size: 14px;
-            }
-
-            .brand-subtitle {
-                display: none;
-            }
-
-            .nav-links {
-                gap: 2px;
-            }
-
-            .nav-links a {
-                padding: 8px 9px;
-
-                font-size: 11px;
-            }
-
-            .hero {
-                min-height: 320px;
-            }
-
-            .hero-content {
-                padding: 55px 20px;
-            }
-
-            .hero-title {
-                font-size: clamp(2.3rem, 10vw, 4rem);
-            }
-
-            .main {
-                padding: 35px 16px 45px;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 600px) {
-
-            .navbar-inner {
-                flex-direction: column;
-
-                align-items: stretch;
-
-                gap: 10px;
-
-                padding: 12px 14px;
-            }
-
-            .brand {
-                justify-content: center;
-            }
-
-            .nav-links {
-                justify-content: center;
-            }
-
-            .nav-links a {
-                padding: 7px 8px;
-
-                font-size: 10px;
-            }
-
-            .hero {
-                min-height: 300px;
-            }
-
-            .hero-content {
-                padding: 45px 18px;
-            }
-
-            .hero-badge {
-                font-size: 10px;
-            }
-
-            .hero-description {
-                font-size: 13px;
-            }
-
-            .calendar-toolbar {
-                flex-direction: column;
-
-                align-items: stretch;
-            }
-
-            .google-calendar-button {
-                justify-content: center;
-            }
-
-            .calendar-container {
-                min-height: 650px;
-            }
-
-            .calendar-container iframe {
-                height: 650px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Takwim PIBG SMKA (P) Al-Mashoor</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    fontFamily: { sans: ['Poppins','sans-serif'] },
+    colors: {
+      primary: { DEFAULT:'#142952', dark:'#0a1733', light:'#1e3c75' },
+      secondary: { DEFAULT:'#f6a735', hover:'#e0952b' }
+    }
+  } }
+}
+</script>
+<style>
+body{margin:0;background:#F8FAFC;color:#1F2937;font-family:'Poppins',sans-serif;-webkit-font-smoothing:antialiased}
+.hero{background:linear-gradient(90deg,rgba(10,23,51,.96),rgba(20,41,82,.78),rgba(20,41,82,.55)),url('assets/images/school.jpg') center/cover no-repeat}
+.calendar-shell{box-shadow:0 10px 30px -5px rgba(0,0,0,.08)}
+.calendar-frame{width:100%;height:min(78vh,820px);min-height:620px;border:0;display:block}
+@media(max-width:768px){.calendar-frame{height:760px;min-height:760px}}
+</style>
 </head>
-
 <body>
 
-    <!-- =========================================================
-         NAVIGATION
-         ========================================================= -->
-
-    <nav class="navbar">
-        <div class="navbar-inner">
-
-            <a
-                href="index.html"
-                class="brand"
-            >
-                <div class="brand-icon">
-                    <i class="fa-solid fa-school"></i>
-                </div>
-
-                <div class="brand-text">
-                    <span class="brand-title">
-                        PIBG SMKA (P) AL-MASHOOR
-                    </span>
-
-                    <span class="brand-subtitle">
-                        Portal Digital Rasmi
-                    </span>
-                </div>
-            </a>
-
-            <ul class="nav-links">
-
-                <li>
-                    <a href="index.html">
-                        UTAMA
-                    </a>
-                </li>
-
-                <li>
-                    <a href="index.html#quick-access">
-                        WORKSPACE
-                    </a>
-                </li>
-
-                <li>
-                    <a href="takwim.html" class="active">
-                        TAKWIM
-                    </a>
-                </li>
-
-                <li>
-                    <a href="index.html#gallery-section">
-                        GALERI
-                    </a>
-                </li>
-
-            </ul>
-
+<nav class="bg-primary text-white sticky top-0 z-50 shadow-lg">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-secondary text-primary flex items-center justify-center shadow-md"><i class="fas fa-school"></i></div>
+        <div class="leading-tight">
+          <div class="font-extrabold text-base md:text-lg">PIBG SMKA (P) AL-MASHOOR</div>
+          <div class="text-[9px] md:text-[10px] font-bold tracking-[.18em] text-secondary">PORTAL DIGITAL RASMI</div>
         </div>
-    </nav>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
+        <a href="index.html" class="hover:text-secondary transition">UTAMA</a>
+        <a href="index.html#workspace" class="hover:text-secondary transition">WORKSPACE</a>
+        <a href="takwim.html" class="bg-secondary text-primary px-5 py-3 rounded-lg">TAKWIM</a>
+        <a href="index.html#galeri" class="hover:text-secondary transition">GALERI</a>
+      </div>
+    </div>
+  </div>
+</nav>
 
+<header class="hero">
+  <div class="max-w-6xl mx-auto px-5 py-20 md:py-24">
+    <div class="max-w-3xl">
+      <div class="text-secondary font-extrabold tracking-[.22em] text-xs mb-4">TAKWIM RASMI PIBG</div>
+      <h1 class="text-white text-4xl md:text-6xl font-extrabold leading-tight">Takwim <span class="text-secondary">PIBG</span></h1>
+      <p class="text-white/85 mt-5 text-sm md:text-base max-w-2xl">Jadual mesyuarat, program, aktiviti dan tarikh penting PIBG SMKA (P) Al-Mashoor.</p>
+    </div>
+  </div>
+</header>
 
-    <!-- =========================================================
-         HERO
-         ========================================================= -->
+<main class="max-w-6xl mx-auto px-5 py-12 md:py-16">
+  <div class="mb-7">
+    <div class="text-secondary font-extrabold tracking-[.2em] text-xs mb-2">TAKWIM RASMI</div>
+    <h2 class="text-primary text-2xl md:text-3xl font-extrabold">Takwim & Aktiviti PIBG</h2>
+    <p class="text-gray-500 text-sm mt-2">Semua tarikh mesyuarat, program dan aktiviti rasmi PIBG dipaparkan melalui Google Calendar.</p>
+  </div>
 
-    <section class="hero">
-
-        <img
-            src="assets/images/school-building.jpg"
-            alt="Bangunan SMKA (P) Al-Mashoor"
-            class="hero-image"
-        >
-
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-
-            <div class="hero-badge">
-                <i class="fa-solid fa-calendar-check"></i>
-                PORTAL DIGITAL RASMI
-            </div>
-
-            <h1 class="hero-title">
-                TAKWIM <span>PIBG</span>
-            </h1>
-
-            <p class="hero-description">
-                Jadual mesyuarat, program, aktiviti dan tarikh penting
-                PIBG SMKA (P) Al-Mashoor.
-            </p>
-
+  <section class="calendar-shell bg-white border border-gray-200 rounded-2xl overflow-hidden">
+    <div class="px-5 py-4 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-orange-50 text-secondary flex items-center justify-center"><i class="far fa-calendar-alt text-lg"></i></div>
+        <div>
+          <div class="font-bold text-primary">Takwim PIBG SMKA (P) Al-Mashoor</div>
+          <div class="text-xs text-gray-500">Google Calendar • Malaysia Time (GMT+08:00)</div>
         </div>
+      </div>
+      <a href="https://calendar.google.com/calendar/u/0/r?cid=43e05a5a72ef6696289cfba03110e4a0efcd845a45a64fc7f2f6341bf4e0a5149%40group.calendar.google.com" target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-light text-white font-bold text-sm px-5 py-3 rounded-lg transition">
+        <i class="fab fa-google"></i><span>Buka Google Calendar</span><i class="fas fa-arrow-up-right-from-square text-xs"></i>
+      </a>
+    </div>
 
-    </section>
+    <iframe class="calendar-frame"
+      src="https://calendar.google.com/calendar/u/0/newembed?src=43e05a5a72ef6696289cfba03110e4a0efcd845a45a64fc7f2f6341bf4e0a5149%40group.calendar.google.com&ctz=Asia%2FKuala_Lumpur"
+      title="Takwim PIBG SMKA (P) Al-Mashoor" frameborder="0" scrolling="no"></iframe>
 
+    <div class="px-5 py-4 bg-gray-50 border-t border-gray-200">
+      <div class="text-sm font-semibold text-primary">Google Calendar</div>
+      <div class="text-xs text-gray-500 mt-1">Events shown in time zone: (GMT+08:00) Malaysia Time - Kuala Lumpur</div>
+      <a href="https://calendar.google.com/calendar/u/0/r?cid=43e05a5a72ef6696289cfba03110e4a0efcd845a45a64fc7f2f6341bf4e0a5149%40group.calendar.google.com" target="_blank" rel="noopener noreferrer"
+         class="inline-block mt-2 text-xs font-semibold text-primary hover:text-secondary transition">Add to Google Calendar</a>
+    </div>
+  </section>
 
-    <!-- =========================================================
-         MAIN CONTENT
-         ========================================================= -->
+  <div class="mt-8 flex flex-col sm:flex-row gap-3">
+    <a href="index.html" class="inline-flex items-center justify-center gap-2 border-2 border-primary/20 text-primary font-semibold px-5 py-3 rounded-lg hover:border-primary transition">
+      <i class="fas fa-arrow-left"></i>Kembali ke Utama
+    </a>
+    <a href="https://calendar.google.com/calendar/u/0/r?cid=43e05a5a72ef6696289cfba03110e4a0efcd845a45a64fc7f2f6341bf4e0a5149%40group.calendar.google.com" target="_blank" rel="noopener noreferrer"
+       class="inline-flex items-center justify-center gap-2 bg-secondary text-primary font-bold px-5 py-3 rounded-lg hover:bg-secondary-hover transition">
+      <i class="fas fa-calendar-check"></i>Urus Takwim
+    </a>
+  </div>
+</main>
 
-    <main class="main">
-
-        <div class="section-heading">
-
-            <span class="section-label">
-                TAKWIM RASMI
-            </span>
-
-            <h2 class="section-title">
-                Takwim & Aktiviti PIBG
-            </h2>
-
-            <p class="section-description">
-                Semua tarikh mesyuarat, program dan aktiviti rasmi PIBG
-                dipaparkan melalui Google Calendar.
-            </p>
-
-        </div>
-
-
-        <!-- =====================================================
-             CALENDAR
-             ===================================================== -->
-
-        <div class="calendar-card">
-
-            <div class="calendar-toolbar">
-
-                <div class="calendar-toolbar-title">
-
-                    <div class="calendar-icon">
-                        <i class="fa-solid fa-calendar-days"></i>
-                    </div>
-
-                    <span>
-                        Takwim PIBG SMKA (P) Al-Mashoor
-                    </span>
-
-                </div>
-
-                <a
-                    href="https://calendar.google.com/calendar/embed?src=43e05a5a72ef6696289cfba03110e4a0efcd845a45a64fc7f2f6341bf4e0a5149%40group.calendar.google.com&ctz=Asia%2FKuala_Lumpur"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="google-calendar-button"
-                >
-                    <i class="fa-brands fa-google"></i>
-                    Buka Google Calendar
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
-
-            </div>
-
-
-            <div class="calendar-container">
-
-                <iframe
-                    src="https://calendar.google.com/calendar/embed?src=43e05a5a72ef6696289cfba03110e4a0efcd845a45a64fc7f2f6341bf4e0a5149%40group.calendar.google.com&ctz=Asia%2FKuala_Lumpur"
-                    title="Takwim PIBG SMKA (P) Al-Mashoor"
-                    loading="lazy"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-        </div>
-
-
-        <!-- =====================================================
-             INFORMATION CARDS
-             ===================================================== -->
-
-        <div class="info-grid">
-
-            <div class="info-card">
-
-                <div class="info-icon">
-                    <i class="fa-solid fa-users"></i>
-                </div>
-
-                <h3>
-                    Mesyuarat PIBG
-                </h3>
-
-                <p>
-                    Tarikh dan masa mesyuarat AJK serta aktiviti
-                    berkaitan pengurusan PIBG.
-                </p>
-
-            </div>
-
-
-            <div class="info-card">
-
-                <div class="info-icon">
-                    <i class="fa-solid fa-calendar-check"></i>
-                </div>
-
-                <h3>
-                    Program & Aktiviti
-                </h3>
-
-                <p>
-                    Maklumat tarikh program, aktiviti sekolah dan
-                    penglibatan komuniti PIBG.
-                </p>
-
-            </div>
-
-
-            <div class="info-card">
-
-                <div class="info-icon">
-                    <i class="fa-solid fa-bell"></i>
-                </div>
-
-                <h3>
-                    Tarikh Penting
-                </h3>
-
-                <p>
-                    Gunakan takwim rasmi ini sebagai rujukan utama
-                    untuk tarikh dan aktiviti PIBG.
-                </p>
-
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <!-- =========================================================
-         FOOTER
-         ========================================================= -->
-
-    <footer class="footer">
-
-        <p class="footer-title">
-            PIBG SMKA (P) Al-Mashoor
-        </p>
-
-        <p class="footer-text">
-            © 2026 Hak Cipta Terpelihara. Portal Digital Rasmi PIBG.
-        </p>
-
-    </footer>
-
+<footer class="bg-primary text-white mt-8">
+  <div class="max-w-6xl mx-auto px-5 py-8 text-center text-xs text-white/60">© 2026 PIBG SMKA (P) Al-Mashoor. Portal Digital Rasmi.</div>
+</footer>
 </body>
 </html>
