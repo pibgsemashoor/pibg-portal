@@ -237,12 +237,37 @@
                         <h3 class="text-xl font-bold text-main uppercase tracking-wide">PENGUMUMAN TERKINI</h3>
                     </div>
                     
-                    <!-- Announcement Content Block -->
-                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+                    <!-- Announcement Content Block (dynamic from Google Calendar) -->
+                    <div id="latest-announcement" class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
                         <div class="flex items-center gap-3 mb-4">
                             <span class="bg-secondary text-primary text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">NEW</span>
-                            <h4 class="text-lg font-bold text-main">Mesyuarat AJK Bil.1/2026</h4>
+                            <h4 id="announcement-title" class="text-lg font-bold text-main">Memuatkan pengumuman...</h4>
                         </div>
+
+                        <div class="space-y-2.5 text-sm text-gray-600 mb-6 font-medium">
+                            <div class="flex items-center gap-3">
+                                <i class="far fa-calendar text-gray-400 w-4 text-center"></i>
+                                <span id="announcement-date">Sila tunggu...</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="far fa-clock text-gray-400 w-4 text-center"></i>
+                                <span id="announcement-time">Sila tunggu...</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-map-marker-alt text-gray-400 w-4 text-center mt-0.5"></i>
+                                <span id="announcement-location">Sila tunggu...</span>
+                            </div>
+                        </div>
+
+                        <p id="announcement-description" class="text-sm text-gray-600 mb-6 leading-relaxed">
+                            Memuatkan maklumat daripada Google Calendar...
+                        </p>
+
+                        <a href="takwim.html" class="bg-primary hover:bg-primary-light text-white text-sm font-semibold py-2.5 px-6 rounded-lg transition-colors shadow-sm inline-flex items-center gap-2">
+                            <span>Lihat Takwim</span>
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </a>
+                    </div>
                         
                         <div class="space-y-2.5 text-sm text-gray-600 mb-6 font-medium">
                             <div class="flex items-center gap-3">
@@ -535,11 +560,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             const nav = document.getElementById('main-nav');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
+                if (window.scrollY > 50) nav.classList.add('scrolled');
+                else nav.classList.remove('scrolled');
             });
 
             const btn = document.getElementById('mobile-menu-btn');
@@ -565,11 +587,7 @@
                 });
             });
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -580,38 +598,34 @@
                 });
             }, observerOptions);
 
-            document.querySelectorAll('.fade-in-up').forEach((element) => {
-                observer.observe(element);
-            });
+            document.querySelectorAll('.fade-in-up').forEach(element => observer.observe(element));
 
             const counterObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counter = entry.target;
-                        const target = +counter.getAttribute('data-target');
-                        const duration = 1500;
-                        const increment = target / (duration / 16);
-                        
-                        let current = 0;
-                        const updateCounter = () => {
-                            current += increment;
-                            if (current < target) {
-                                counter.innerText = Math.ceil(current);
-                                requestAnimationFrame(updateCounter);
-                            } else {
-                                counter.innerText = target;
-                            }
-                        };
-                        updateCounter();
-                        observer.unobserve(counter);
-                    }
+                    if (!entry.isIntersecting) return;
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const duration = 1500;
+                    const increment = target / (duration / 16);
+                    let current = 0;
+
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+
+                    updateCounter();
+                    observer.unobserve(counter);
                 });
             }, observerOptions);
 
-            document.querySelectorAll('.counter').forEach(counter => {
-                counterObserver.observe(counter);
-            });
-            
+            document.querySelectorAll('.counter').forEach(counter => counterObserver.observe(counter));
+
             const WORKSPACE_CONFIG = {
                 driveUrl: "https://drive.google.com",
                 calendarUrl: "https://calendar.google.com",
@@ -621,6 +635,123 @@
                 photosUrl: "https://photos.google.com",
                 meetUrl: "https://meet.google.com"
             };
+
+            /* =========================================================
+               GOOGLE CALENDAR - LATEST ANNOUNCEMENT
+               Replace the placeholder API key below with your key.
+               Keep the key restricted to Google Calendar API and
+               restricted to your GitHub Pages website referrer.
+               ========================================================= */
+            const CALENDAR_ID = '43e05a5a72ef6696289cfba03110e4a0efcd845a45a64fc7f2f6341bf4e0a5149@group.calendar.google.com';
+            const API_KEY = 'AIzaSyA7B3jB-OaSYMeaj7fbautTvrTqpcqrI1U';
+
+            const titleEl = document.getElementById('announcement-title');
+            const dateEl = document.getElementById('announcement-date');
+            const timeEl = document.getElementById('announcement-time');
+            const locationEl = document.getElementById('announcement-location');
+            const descriptionEl = document.getElementById('announcement-description');
+
+            const formatDate = (date) => new Intl.DateTimeFormat('ms-MY', {
+                timeZone: 'Asia/Kuala_Lumpur',
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            }).format(date);
+
+            const formatTime = (date) => new Intl.DateTimeFormat('ms-MY', {
+                timeZone: 'Asia/Kuala_Lumpur',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            }).format(date).replace('AM', 'pagi').replace('PM', 'petang');
+
+            const eventStart = (event) => {
+                if (event.start?.dateTime) return new Date(event.start.dateTime);
+                if (event.start?.date) return new Date(`${event.start.date}T00:00:00+08:00`);
+                return null;
+            };
+
+            const eventEnd = (event) => {
+                if (event.end?.dateTime) return new Date(event.end.dateTime);
+                if (event.end?.date) return new Date(`${event.end.date}T23:59:59+08:00`);
+                return null;
+            };
+
+            const loadLatestAnnouncement = async () => {
+                if (!API_KEY || API_KEY === 'YOUR_GOOGLE_CALENDAR_API_KEY') {
+                    titleEl.textContent = 'Konfigurasi Calendar diperlukan';
+                    dateEl.textContent = 'API key belum dimasukkan';
+                    timeEl.textContent = '-';
+                    locationEl.textContent = '-';
+                    descriptionEl.textContent = 'Masukkan Google Calendar API key yang telah dicipta ke dalam index.html.';
+                    return;
+                }
+
+                try {
+                    const now = new Date();
+                    const params = new URLSearchParams({
+                        key: API_KEY,
+                        timeMin: now.toISOString(),
+                        singleEvents: 'true',
+                        orderBy: 'startTime',
+                        maxResults: '10'
+                    });
+
+                    const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?${params.toString()}`;
+                    const response = await fetch(url, { cache: 'no-store' });
+
+                    if (!response.ok) {
+                        throw new Error(`Calendar API HTTP ${response.status}`);
+                    }
+
+                    const data = await response.json();
+
+                    const upcoming = (data.items || [])
+                        .filter(event => event.status !== 'cancelled')
+                        .map(event => ({ event, start: eventStart(event), end: eventEnd(event) }))
+                        .filter(item => item.start && (!item.end || item.end >= now))
+                        .sort((a, b) => a.start - b.start);
+
+                    if (!upcoming.length) {
+                        titleEl.textContent = 'Tiada pengumuman akan datang';
+                        dateEl.textContent = '-';
+                        timeEl.textContent = '-';
+                        locationEl.textContent = '-';
+                        descriptionEl.textContent = 'Tiada aktiviti atau mesyuarat akan datang dalam takwim PIBG.';
+                        return;
+                    }
+
+                    const { event, start, end } = upcoming[0];
+
+                    titleEl.textContent = event.summary || 'Pengumuman PIBG';
+                    dateEl.textContent = formatDate(start);
+
+                    if (event.start?.date) {
+                        timeEl.textContent = 'Sepanjang hari';
+                    } else if (end) {
+                        timeEl.textContent = `${formatTime(start)} – ${formatTime(end)}`;
+                    } else {
+                        timeEl.textContent = formatTime(start);
+                    }
+
+                    locationEl.textContent = event.location || 'Lokasi akan dimaklumkan';
+
+                    const description = (event.description || '').replace(/\s+/g, ' ').trim();
+                    descriptionEl.textContent = description
+                        ? description.substring(0, 180) + (description.length > 180 ? '…' : '')
+                        : 'Maklumat lanjut boleh dirujuk melalui takwim PIBG.';
+                } catch (error) {
+                    console.error('Google Calendar announcement error:', error);
+                    titleEl.textContent = 'Pengumuman Terkini';
+                    dateEl.textContent = 'Tidak dapat dimuatkan';
+                    timeEl.textContent = '-';
+                    locationEl.textContent = '-';
+                    descriptionEl.textContent = 'Maklumat takwim tidak dapat dimuatkan buat sementara waktu. Sila semak halaman Takwim.';
+                }
+            };
+
+            loadLatestAnnouncement();
         });
     </script>
 </body>
