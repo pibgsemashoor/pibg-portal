@@ -641,14 +641,36 @@
                     }
 
                     // ==========================================
-                    // AKTIVITI AKAN DATANG LOGIC (Unchanged)
+                    // AKTIVITI AKAN DATANG LOGIC (Relative to Latest Announcement Date)
                     // ==========================================
+                    let latestAnnouncementDate = now; // fallback
+                    if (topAnnouncements.length > 0) {
+                        const announcementDates = topAnnouncements.map(ev => new Date(ev.startTime).getTime());
+                        latestAnnouncementDate = new Date(Math.max(...announcementDates));
+                    }
+
+                    const activityStartDate = new Date(latestAnnouncementDate.getTime());
+                    activityStartDate.setDate(activityStartDate.getDate() + 1);
+                    activityStartDate.setHours(0, 0, 0, 0);
+
+                    const activityEndDate = new Date(activityStartDate.getFullYear(), activityStartDate.getMonth() + 3, activityStartDate.getDate());
+                    activityEndDate.setHours(23, 59, 59, 999);
+
+                    const eligibleActivities = rawEvents.filter(ev => {
+                        if (!ev.startTime) return false;
+                        const evDate = new Date(ev.startTime);
+                        if (isNaN(evDate.getTime())) return false;
+                        if (ev.status && ev.status === 'CANCELLED') return false;
+
+                        return evDate > latestAnnouncementDate && evDate <= activityEndDate;
+                    });
+
+                    eligibleActivities.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+
                     const eventsContainer = document.getElementById('dynamic-events-container');
                     if (eventsContainer) {
-                        const remainingEvents = rawEvents.slice(1);
-
-                        if (remainingEvents.length > 0) {
-                            eventsContainer.innerHTML = remainingEvents.map(ev => {
+                        if (eligibleActivities.length > 0) {
+                            eventsContainer.innerHTML = eligibleActivities.map(ev => {
                                 const evDate = new Date(ev.startTime);
                                 const dayNum = evDate.getDate();
                                 const monthShort = evDate.toLocaleDateString('ms-MY', { month: 'short' }).toUpperCase();
