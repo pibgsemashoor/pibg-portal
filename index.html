@@ -233,8 +233,8 @@
                         <h3 class="text-xl font-bold text-main uppercase tracking-wide">PENGUMUMAN TERKINI</h3>
                     </div>
                     
-                    <!-- Dynamic Announcement Injection Target -->
-                    <div id="dynamic-announcement-container">
+                    <!-- Dynamic Announcement Injection Target (Supports up to 3 announcements) -->
+                    <div id="dynamic-announcement-container" class="space-y-4">
                         <p class="text-sm text-gray-400 italic">Memuatkan pengumuman terkini...</p>
                     </div>
                 </div>
@@ -558,53 +558,97 @@
                     console.log("Fetched Calendar Data:", data);
                     if (!data.success || !data.events) return;
 
-                    const events = data.events;
+                    const rawEvents = data.events;
 
-                    // 1. Render Announcement (Takes the very first event available)
+                    // ==========================================
+                    // PENGUMUMAN TERKINI LOGIC (Rolling Window & Priority Sorting)
+                    // ==========================================
+                    const now = new Date();
+                    
+                    // START = today minus 1 calendar month
+                    const windowStart = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+                    // END = today plus 14 days
+                    const windowEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 14);
+
+                    const eligibleAnnouncements = rawEvents.filter(ev => {
+                        if (!ev.startTime) return false;
+                        const evDate = new Date(ev.startTime);
+                        if (isNaN(evDate.getTime())) return false;
+                        if (ev.status && ev.status === 'CANCELLED') return false;
+                        
+                        return evDate >= windowStart && evDate <= windowEnd;
+                    });
+
+                    // Priority sorting:
+                    // 1. Upcoming events closest to today get highest priority (ascending).
+                    // 2. Past events within the historical window are used as fallback (descending from now).
+                    eligibleAnnouncements.sort((a, b) => {
+                        const dateA = new Date(a.startTime);
+                        const dateB = new Date(b.startTime);
+                        const diffA = dateA - now;
+                        const diffB = dateB - now;
+
+                        const isFutureA = diffA >= 0;
+                        const isFutureB = diffB >= 0;
+
+                        if (isFutureA && isFutureB) {
+                            return diffA - diffB; // closest upcoming first
+                        } else if (!isFutureA && !isFutureB) {
+                            return diffB - diffA; // most recent past first
+                        } else {
+                            return isFutureA ? -1 : 1; // upcoming prioritized over past
+                        }
+                    });
+
+                    const topAnnouncements = eligibleAnnouncements.slice(0, 3);
                     const announceContainer = document.getElementById('dynamic-announcement-container');
-                    const announcementEvent = events.length > 0 ? events[0] : null;
 
-                    if (announceContainer && announcementEvent) {
-                        const evDate = new Date(announcementEvent.startTime);
-                        const dateString = evDate.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
-                        const timeString = announcementEvent.isAllDay ? 'Sepanjang Hari' : evDate.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit' });
+                    if (announceContainer && topAnnouncements.length > 0) {
+                        announceContainer.innerHTML = topAnnouncements.map((announcementEvent, index) => {
+                            const evDate = new Date(announcementEvent.startTime);
+                            const dateString = evDate.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
+                            const timeString = announcementEvent.isAllDay ? 'Sepanjang Hari' : evDate.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit' });
+                            const isFirst = index === 0;
 
-                        announceContainer.innerHTML = `
-                            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-                                <div class="flex items-center gap-3 mb-4">
-                                    <span class="bg-secondary text-primary text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">RASMI</span>
-                                    <h4 class="text-lg font-bold text-main">${announcementEvent.title}</h4>
-                                </div>
-                                <div class="space-y-2.5 text-sm text-gray-600 mb-6 font-medium">
-                                    <div class="flex items-center gap-3">
-                                        <i class="far fa-calendar text-gray-400 w-4 text-center"></i> 
-                                        <span>${dateString}</span>
+                            return `
+                                <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 ${isFirst ? '' : 'mt-4'}">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <span class="bg-secondary text-primary text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">RASMI</span>
+                                        <h4 class="text-lg font-bold text-main">${announcementEvent.title}</h4>
                                     </div>
-                                    <div class="flex items-center gap-3">
-                                        <i class="far fa-clock text-gray-400 w-4 text-center"></i> 
-                                        <span>${timeString}</span>
+                                    <div class="space-y-2.5 text-sm text-gray-600 mb-6 font-medium">
+                                        <div class="flex items-center gap-3">
+                                            <i class="far fa-calendar text-gray-400 w-4 text-center"></i> 
+                                            <span>${dateString}</span>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <i class="far fa-clock text-gray-400 w-4 text-center"></i> 
+                                            <span>${timeString}</span>
+                                        </div>
+                                        ${announcementEvent.location ? `
+                                        <div class="flex items-start gap-3">
+                                            <i class="fas fa-map-marker-alt text-gray-400 w-4 text-center mt-0.5"></i> 
+                                            <span>${announcementEvent.location}</span>
+                                        </div>` : ''}
                                     </div>
-                                    ${announcementEvent.location ? `
-                                    <div class="flex items-start gap-3">
-                                        <i class="fas fa-map-marker-alt text-gray-400 w-4 text-center mt-0.5"></i> 
-                                        <span>${announcementEvent.location}</span>
-                                    </div>` : ''}
+                                    ${announcementEvent.description ? `<p class="text-sm text-gray-600 mb-6 leading-relaxed">${announcementEvent.description}</p>` : ''}
+                                    <a href="takwim.html" class="bg-primary hover:bg-primary-light text-white text-sm font-semibold py-2.5 px-6 rounded-lg transition-colors shadow-sm inline-flex items-center gap-2">
+                                        <span>Lihat Takwim Penuh</span>
+                                        <i class="fas fa-chevron-right text-xs"></i>
+                                    </a>
                                 </div>
-                                ${announcementEvent.description ? `<p class="text-sm text-gray-600 mb-6 leading-relaxed">${announcementEvent.description}</p>` : ''}
-                                <a href="takwim.html" class="bg-primary hover:bg-primary-light text-white text-sm font-semibold py-2.5 px-6 rounded-lg transition-colors shadow-sm inline-flex items-center gap-2">
-                                    <span>Lihat Takwim Penuh</span>
-                                    <i class="fas fa-chevron-right text-xs"></i>
-                                </a>
-                            </div>
-                        `;
+                            `;
+                        }).join('');
                     } else if (announceContainer) {
                         announceContainer.innerHTML = `<p class="text-xs text-gray-400 italic">Tiada pengumuman rasmi buat masa ini.</p>`;
                     }
 
-                    // 2. Render Upcoming Activities (Takes all remaining events)
+                    // ==========================================
+                    // AKTIVITI AKAN DATANG LOGIC (Unchanged)
+                    // ==========================================
                     const eventsContainer = document.getElementById('dynamic-events-container');
                     if (eventsContainer) {
-                        const remainingEvents = events.slice(1); // Takes all events after the first one
+                        const remainingEvents = rawEvents.slice(1); // Takes all events after the first one
 
                         if (remainingEvents.length > 0) {
                             eventsContainer.innerHTML = remainingEvents.map(ev => {
