@@ -225,7 +225,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 
                 <!-- Announcements (Span 7) -->
-                <div class="lg:col-span-7 bg-surface rounded-3xl border border-border p-8 shadow-card hover-lift fade-in-up">
+                <div class="lg:col-span-7 bg-surface rounded-3xl border border-border p-8 shadow-card hover-lift fade-in-up flex flex-col">
                     <div class="flex items-center gap-4 mb-8">
                         <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shadow-sm flex-shrink-0">
                             <i class="fas fa-bullhorn text-lg"></i>
@@ -233,8 +233,8 @@
                         <h3 class="text-xl font-bold text-main uppercase tracking-wide">PENGUMUMAN TERKINI</h3>
                     </div>
                     
-                    <!-- Dynamic Announcement Injection Target (Supports up to 3 announcements) -->
-                    <div id="dynamic-announcement-container" class="space-y-4">
+                    <!-- Single Outer Card with Internal Scrollable Area -->
+                    <div id="dynamic-announcement-container" class="space-y-4 overflow-y-auto max-h-[480px] pr-2">
                         <p class="text-sm text-gray-400 italic">Memuatkan pengumuman terkini...</p>
                     </div>
                 </div>
@@ -562,13 +562,12 @@
 
                     // ==========================================
                     // PENGUMUMAN TERKINI LOGIC (Rolling Window & Priority Sorting)
+                    // Window: Today - 7 days through Today + 7 days
                     // ==========================================
                     const now = new Date();
                     
-                    // START = today minus 1 calendar month
-                    const windowStart = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
-                    // END = today plus 14 days
-                    const windowEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 14);
+                    const windowStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
+                    const windowEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7);
 
                     const eligibleAnnouncements = rawEvents.filter(ev => {
                         if (!ev.startTime) return false;
@@ -579,9 +578,7 @@
                         return evDate >= windowStart && evDate <= windowEnd;
                     });
 
-                    // Priority sorting:
-                    // 1. Upcoming events closest to today get highest priority (ascending).
-                    // 2. Past events within the historical window are used as fallback (descending from now).
+                    // Priority sorting: upcoming events closest to today first, followed by recent past events
                     eligibleAnnouncements.sort((a, b) => {
                         const dateA = new Date(a.startTime);
                         const dateB = new Date(b.startTime);
@@ -648,7 +645,7 @@
                     // ==========================================
                     const eventsContainer = document.getElementById('dynamic-events-container');
                     if (eventsContainer) {
-                        const remainingEvents = rawEvents.slice(1); // Takes all events after the first one
+                        const remainingEvents = rawEvents.slice(1);
 
                         if (remainingEvents.length > 0) {
                             eventsContainer.innerHTML = remainingEvents.map(ev => {
