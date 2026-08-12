@@ -365,15 +365,15 @@
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Metric 1 -->
+                <!-- Metric 1: AJK Counter (Automated) -->
                 <div class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover-lift fade-in-up delay-100">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
                             <i class="fas fa-users text-2xl"></i>
                         </div>
                         <div>
-                            <p class="text-3xl font-bold text-main counter" data-target="18">18</p>
-                            <p class="text-xs font-bold text-muted uppercase tracking-wider">Ahli AJK</p>
+                            <p id="ajk-kpi-counter" class="text-3xl font-bold text-main">--</p>
+                            <p class="text-xs font-bold text-muted uppercase tracking-wider mt-1">Ahli AJK</p>
                             <p class="text-xs text-gray-400 mt-1">Sesi 2026/2027</p>
                         </div>
                     </div>
@@ -517,21 +517,23 @@
                     if (entry.isIntersecting) {
                         const counter = entry.target;
                         const target = +counter.getAttribute('data-target');
-                        const duration = 1500;
-                        const increment = target / (duration / 16);
-                        
-                        let current = 0;
-                        const updateCounter = () => {
-                            current += increment;
-                            if (current < target) {
-                                counter.innerText = Math.ceil(current);
-                                requestAnimationFrame(updateCounter);
-                            } else {
-                                counter.innerText = target;
-                            }
-                        };
-                        updateCounter();
-                        observer.unobserve(counter);
+                        if (target) {
+                            const duration = 1500;
+                            const increment = target / (duration / 16);
+                            
+                            let current = 0;
+                            const updateCounter = () => {
+                                current += increment;
+                                if (current < target) {
+                                    counter.innerText = Math.ceil(current);
+                                    requestAnimationFrame(updateCounter);
+                                } else {
+                                    counter.innerText = target;
+                                }
+                            };
+                            updateCounter();
+                            observer.unobserve(counter);
+                        }
                     }
                 });
             }, observerOptions);
@@ -555,7 +557,35 @@
             fetch(WEB_APP_URL)
                 .then(response => response.json())
                 .then(data => {
-                    console.log("Fetched Calendar Data:", data);
+                    console.log("Fetched Data:", data);
+
+                    // ==========================================
+                    // AUTOMATED AJK KPI LOGIC
+                    // ==========================================
+                    const ajkCounter = document.getElementById('ajk-kpi-counter');
+                    if (data.totalAJK) {
+                        const target = parseInt(data.totalAJK, 10);
+                        const duration = 1500;
+                        const increment = target / (duration / 16);
+                        let current = 0;
+                        
+                        const updateAjk = () => {
+                            current += increment;
+                            if (current < target) {
+                                ajkCounter.innerText = Math.ceil(current);
+                                requestAnimationFrame(updateAjk);
+                            } else {
+                                ajkCounter.innerText = target;
+                            }
+                        };
+                        updateAjk();
+                    } else {
+                        // Fail-safe requirement
+                        ajkCounter.classList.remove('text-3xl');
+                        ajkCounter.classList.add('text-sm', 'text-red-500');
+                        ajkCounter.innerText = "Data tidak dapat dimuatkan";
+                    }
+
                     if (!data.success || !data.events) return;
 
                     const rawEvents = data.events;
@@ -697,7 +727,7 @@
                         }
                     }
                 })
-                .catch(err => console.error('Error fetching dynamic calendar feed:', err));
+                .catch(err => console.error('Error fetching dynamic data:', err));
 
         });
     </script>
