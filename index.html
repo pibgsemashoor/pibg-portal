@@ -19,27 +19,12 @@
                         sans: ['Poppins', 'sans-serif'],
                     },
                     colors: {
-                        primary: {
-                            DEFAULT: '#142952',
-                            dark: '#0a1733',
-                            light: '#1e3c75'
-                        },
-                        secondary: {
-                            DEFAULT: '#f6a735',
-                            hover: '#e0952b'
-                        },
+                        primary: { DEFAULT: '#142952', dark: '#0a1733', light: '#1e3c75' },
+                        secondary: { DEFAULT: '#f6a735', hover: '#e0952b' },
                         background: '#F8FAFC',
                         surface: '#FFFFFF',
                         border: '#E5E7EB',
-                        text: {
-                            main: '#1F2937',
-                            muted: '#6B7280'
-                        }
-                    },
-                    boxShadow: {
-                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.03)',
-                        'card': '0 10px 30px -5px rgba(0, 0, 0, 0.05)',
-                        'hover': '0 20px 40px -10px rgba(0, 0, 0, 0.08)',
+                        text: { main: '#1F2937', muted: '#6B7280' }
                     }
                 }
             }
@@ -47,172 +32,70 @@
     </script>
     
     <style>
-        body {
-            background-color: #F8FAFC;
-            color: #1F2937;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        #main-nav {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        #main-nav.scrolled {
-            background-color: #142952;
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
-
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 50%;
-            background-color: #f6a735;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .hover-lift {
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-        
-        .hover-lift:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
-            border-color: #E5E7EB;
-        }
-
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
-
-        @keyframes subtle-bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(8px); }
-        }
-        .animate-subtle-bounce {
-            animation: subtle-bounce 2s infinite ease-in-out;
-        }
-        
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* Modal Overlay Styling */
-        .workspace-modal {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
+        body { background-color: #F8FAFC; color: #1F2937; -webkit-font-smoothing: antialiased; }
+        #main-nav { transition: all 0.4s ease; }
+        #main-nav.scrolled { background-color: #142952; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2); padding: 0.5rem 0; }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%; background-color: #f6a735; transition: all 0.3s ease; transform: translateX(-50%); }
+        .nav-link:hover::after { width: 100%; }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08); }
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-secondary selection:text-white">
 
     <nav id="main-nav" class="fixed w-full top-0 z-50 bg-transparent py-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center transition-all duration-300">
-                
-                <!-- Logo & Brand -->
+            <div class="flex justify-between items-center">
                 <div class="flex items-center gap-4 cursor-pointer group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
                     <div class="flex flex-col justify-center">
                         <h1 class="text-white text-sm md:text-base font-bold leading-tight tracking-wide">PIBG SMKA (P) AL-MASHOOR</h1>
                         <p class="text-secondary text-[10px] md:text-xs font-semibold tracking-widest uppercase opacity-90">Portal Digital Rasmi</p>
                     </div>
                 </div>
-
-                <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center space-x-8">
                     <a href="index.html" class="nav-link text-sm font-semibold text-white transition-colors">UTAMA</a>
                     <a href="#quick-access" class="nav-link text-sm font-semibold text-gray-200 hover:text-white transition-colors">WORKSPACE</a>
                     <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="nav-link text-sm font-semibold text-gray-200 hover:text-white transition-colors">TAKWIM</a>
                     <a href="https://photos.app.goo.gl/exG3YVXD2qgLFgvq5" target="_blank" rel="noopener noreferrer" class="nav-link text-sm font-semibold text-white transition-colors">GALERI</a>
                 </div>
-
-                <!-- Mobile Menu Button -->
                 <div class="lg:hidden flex items-center">
-                    <button id="mobile-menu-btn" aria-label="Toggle navigation menu" class="text-white hover:text-secondary focus:outline-none p-2 transition-colors">
+                    <button id="mobile-menu-btn" aria-label="Toggle menu" class="text-white hover:text-secondary focus:outline-none p-2">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
-
-        <!-- Mobile Menu Panel -->
         <div id="mobile-menu" class="hidden lg:hidden bg-primary absolute w-full left-0 top-full border-t border-white/10 shadow-2xl">
             <div class="px-4 py-6 space-y-3">
                 <a href="index.html" class="block px-4 py-3 rounded-lg text-sm font-bold text-white bg-white/15">UTAMA</a>
-                <a href="#quick-access" class="block px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5">WORKSPACE</a>
-                <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="block px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5">TAKWIM</a>
-                <a href="https://photos.app.goo.gl/exG3YVXD2qgLFgvq5" target="_blank" rel="noopener noreferrer" class="block px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5">GALERI</a>
+                <a href="#quick-access" class="block px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:text-white">WORKSPACE</a>
+                <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="block px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:text-white">TAKWIM</a>
+                <a href="https://photos.app.goo.gl/exG3YVXD2qgLFgvq5" target="_blank" rel="noopener noreferrer" class="block px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:text-white">GALERI</a>
             </div>
         </div>
     </nav>
 
     <header class="relative min-h-[600px] xl:min-h-[700px] flex items-center justify-start overflow-hidden bg-primary">
-        <!-- Background Image & Overlay -->
         <div class="absolute inset-0 z-0">
             <div class="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/60 to-transparent z-10"></div>
-            <img src="assets/images/school-building.jpg" alt="Bangunan SMKA (P) Al-Mashoor" class="w-full h-full object-cover object-center scale-105">
+            <img src="assets/images/school-building.jpg" alt="School" class="w-full h-full object-cover object-center scale-105">
         </div>
-
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full pt-32 pb-20">
             <div class="flex flex-col items-start text-left max-w-4xl">
-                
-                <h2 class="text-sm md:text-base font-bold tracking-[0.25em] text-secondary mb-3 uppercase fade-in-up">
-                    PORTAL DIGITAL RASMI
-                </h2>
-                
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-1 leading-none tracking-tight text-white drop-shadow-lg fade-in-up delay-100">
-                    PIBG
-                </h1>
-                
-                <h3 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-secondary mb-6 drop-shadow-md fade-in-up delay-200">
-                    SMKA (P) AL-MASHOOR
-                </h3>
-                
-                <p class="text-lg md:text-xl font-medium text-white/90 mb-4 tracking-wide italic fade-in-up delay-300">
-                    "Menyokong Pendidikan • Memperkasa Komuniti"
-                </p>
-                
-                <p class="text-sm md:text-base font-normal text-gray-300 max-w-2xl mb-10 leading-relaxed fade-in-up delay-300">
-                    Platform rasmi PIBG bagi pengurusan dokumen, komunikasi, program dan kolaborasi komuniti sekolah secara digital.
-                </p>
-                
-                <!-- Enterprise CTA Buttons -->
+                <h2 class="text-sm md:text-base font-bold tracking-[0.25em] text-secondary mb-3 uppercase fade-in-up">PORTAL DIGITAL RASMI</h2>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-1 leading-none text-white drop-shadow-lg fade-in-up delay-100">PIBG</h1>
+                <h3 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-secondary mb-6 drop-shadow-md fade-in-up delay-200">SMKA (P) AL-MASHOOR</h3>
+                <p class="text-lg md:text-xl font-medium text-white/90 mb-4 italic fade-in-up delay-300">"Menyokong Pendidikan • Memperkasa Komuniti"</p>
+                <p class="text-sm md:text-base text-gray-300 max-w-2xl mb-10 leading-relaxed fade-in-up delay-300">Platform rasmi PIBG bagi pengurusan dokumen, komunikasi, program dan kolaborasi komuniti sekolah secara digital.</p>
                 <div class="flex flex-col sm:flex-row items-center gap-4 fade-in-up delay-300 w-full sm:w-auto">
-                    <a href="https://drive.google.com/drive/folders/18EMOWLL0l2R7Dk52XvPq1Vw7vdpB_Fwz?usp=sharing" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-secondary text-primary hover:bg-secondary-hover font-bold py-3.5 px-8 rounded-lg transition-all duration-300 shadow-xl flex items-center justify-center gap-3">
-                        <i class="fas fa-folder-open text-lg"></i>
-                        <span>Akses Dokumen</span>
+                    <a href="https://drive.google.com/drive/folders/18EMOWLL0l2R7Dk52XvPq1Vw7vdpB_Fwz?usp=sharing" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-secondary text-primary hover:bg-secondary-hover font-bold py-3.5 px-8 rounded-lg shadow-xl flex items-center justify-center gap-3">
+                        <i class="fas fa-folder-open text-lg"></i><span>Akses Dokumen</span>
                     </a>
-                    <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="w-full sm:w-auto bg-transparent border-2 border-white/30 hover:border-white text-white font-semibold py-3.5 px-8 rounded-lg transition-all duration-300 flex items-center justify-center gap-3">
-                        <i class="far fa-calendar-alt text-lg"></i>
-                        <span>Takwim Tahunan</span>
+                    <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="w-full sm:w-auto bg-transparent border-2 border-white/30 hover:border-white text-white font-semibold py-3.5 px-8 rounded-lg flex items-center justify-center gap-3">
+                        <i class="far fa-calendar-alt text-lg"></i><span>Takwim Tahunan</span>
                     </a>
                 </div>
             </div>
@@ -220,46 +103,32 @@
     </header>
 
     <main class="relative z-20 bg-background pb-24 -mt-8">
-        
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-30">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                
-                <!-- Announcements (Span 7) - Compact Fixed Outer Card with Internal Scroll -->
                 <div class="lg:col-span-7 bg-surface rounded-3xl border border-border p-8 shadow-card hover-lift fade-in-up flex flex-col h-[460px]">
                     <div class="flex items-center gap-4 mb-6 flex-shrink-0">
-                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shadow-sm flex-shrink-0">
-                            <i class="fas fa-bullhorn text-lg"></i>
-                        </div>
+                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shadow-sm flex-shrink-0"><i class="fas fa-bullhorn text-lg"></i></div>
                         <h3 class="text-xl font-bold text-main uppercase tracking-wide">PENGUMUMAN TERKINI</h3>
                     </div>
-                    
-                    <!-- Scrollable Content Area -->
                     <div id="dynamic-announcement-container" class="space-y-4 overflow-y-auto flex-grow pr-2">
                         <p class="text-sm text-gray-400 italic">Memuatkan pengumuman terkini...</p>
                     </div>
                 </div>
 
-                <!-- Upcoming Events (Span 5) - Compact Fixed Outer Card with Internal Scroll -->
                 <div id="events-section" class="lg:col-span-5 bg-surface rounded-3xl border border-border p-8 shadow-card hover-lift fade-in-up delay-100 flex flex-col h-[460px]">
                     <div class="flex items-center gap-4 mb-6 flex-shrink-0">
-                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shadow-sm flex-shrink-0">
-                            <i class="far fa-calendar-check text-lg"></i>
-                        </div>
+                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shadow-sm flex-shrink-0"><i class="far fa-calendar-check text-lg"></i></div>
                         <h3 class="text-xl font-bold text-main uppercase tracking-wide">AKTIVITI AKAN DATANG</h3>
                     </div>
-                    
-                    <!-- Scrollable Content Area -->
                     <div id="dynamic-events-container" class="space-y-4 overflow-y-auto flex-grow pr-2">
                         <p class="text-sm text-gray-400 italic">Memuatkan aktiviti akan datang...</p>
                     </div>
-                    
                     <div class="mt-4 pt-2 border-t border-gray-100 text-right flex-shrink-0">
-                        <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-2">
+                        <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="text-sm font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center gap-2">
                             Lihat Takwim Penuh <i class="fas fa-arrow-right text-xs"></i>
                         </a>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -269,95 +138,31 @@
                 <h2 class="text-2xl font-bold text-main uppercase tracking-wide">GOOGLE WORKSPACE</h2>
                 <p class="text-sm text-muted mt-1">Akses pantas ke aplikasi utama PIBG SMKA (P) Al-Mashoor.</p>
             </div>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- App Card 1: Drive -->
-                <a href="https://drive.google.com/drive/folders/18EMOWLL0l2R7Dk52XvPq1Vw7vdpB_Fwz?usp=sharing" target="_blank" rel="noopener noreferrer" class="bg-surface rounded-2xl border border-border p-6 flex flex-col justify-start shadow-sm hover:shadow-card hover-lift group fade-in-up delay-100">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-12 h-12 flex items-center justify-center">
-                            <svg viewBox="0 0 87.3 78" class="w-10 h-10"><path d="m6.6 66.85 22.35 43.35C31.2 114.1 35.5 118 40.5 118h46.6c5 0 9.3-3.9 11.55-7.8l22.35-43.35c2.25-3.9 2.25-11.7 0-15.6L98.65 7.9C96.4 4 92.1.1 87.1.1H40.5c-5 0-9.3 3.9-11.55 7.8L6.6 51.25c-2.25 3.9-2.25 11.7 0 15.6z" fill="#000000" fill-opacity="0"/><path d="m43.65 24-21 36.45L5.5 30.65C2.9 26 4.75 20.1 9.3 17.5l22-12.7c4.6-2.6 10.4-1 13 3.6z" fill="#FFC107"/><path d="m60.7 53.6-21.2-36.8c-2.6-4.6-1.1-10.5 3.5-13.1l22-12.7c4.6-2.6 10.4-1.1 13 3.5L99.2 31.4z" fill="#1976D2"/><path d="M79.2 53.6H37.3c-5.2 0-9.6 2.8-12.2 7.3L7.9 90.6C5.3 95.2 6.8 101.1 11.4 103.7l22 12.7c2.6 1.5 5.7 1.8 8.5.8 1.8-.7 3.4-1.9 4.5-3.6l17.2-29.8h28.1c5.2 0 8.3-5.4 5.7-10l-11-19.1c-2.5-4.4-7-7-12.2-7z" fill="#4CAF50"/></svg>
-                        </div>
-                        <i class="fas fa-external-link-alt text-gray-400 group-hover:text-primary transition-colors"></i>
-                    </div>
+                <a href="https://drive.google.com/drive/folders/18EMOWLL0l2R7Dk52XvPq1Vw7vdpB_Fwz?usp=sharing" target="_blank" rel="noopener noreferrer" class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover:shadow-card hover-lift group">
+                    <div class="w-12 h-12 flex items-center mb-4"><svg viewBox="0 0 87.3 78" class="w-10 h-10"><path d="m6.6 66.85 22.35 43.35C31.2 114.1 35.5 118 40.5 118h46.6c5 0 9.3-3.9 11.55-7.8l22.35-43.35c2.25-3.9 2.25-11.7 0-15.6L98.65 7.9C96.4 4 92.1.1 87.1.1H40.5c-5 0-9.3 3.9-11.55 7.8L6.6 51.25c-2.25 3.9-2.25 11.7 0 15.6z" fill-opacity="0"/><path d="m43.65 24-21 36.45L5.5 30.65C2.9 26 4.75 20.1 9.3 17.5l22-12.7c4.6-2.6 10.4-1 13 3.6z" fill="#FFC107"/><path d="m60.7 53.6-21.2-36.8c-2.6-4.6-1.1-10.5 3.5-13.1l22-12.7c4.6-2.6 10.4-1.1 13 3.5L99.2 31.4z" fill="#1976D2"/><path d="M79.2 53.6H37.3c-5.2 0-9.6 2.8-12.2 7.3L7.9 90.6C5.3 95.2 6.8 101.1 11.4 103.7l22 12.7c2.6 1.5 5.7 1.8 8.5.8 1.8-.7 3.4-1.9 4.5-3.6l17.2-29.8h28.1c5.2 0 8.3-5.4 5.7-10l-11-19.1c-2.5-4.4-7-7-12.2-7z" fill="#4CAF50"/></svg></div>
                     <h3 class="text-lg font-bold text-main mb-1">Google Drive</h3>
-                    <p class="text-sm text-muted leading-relaxed">Arkib dokumen rasmi, minit mesyuarat, dan laporan tahunan.</p>
+                    <p class="text-sm text-muted">Arkib dokumen rasmi & laporan.</p>
                 </a>
-
-                <!-- App Card 2: Calendar -->
-                <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="bg-surface rounded-2xl border border-border p-6 flex flex-col justify-start shadow-sm hover:shadow-card hover-lift group fade-in-up delay-200">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-                            <i class="far fa-calendar-alt text-2xl"></i>
-                        </div>
-                        <i class="fas fa-external-link-alt text-gray-400 group-hover:text-primary transition-colors"></i>
-                    </div>
+                <a href="https://pibgsemashoor.github.io/pibg-portal/takwim.html" class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover:shadow-card hover-lift group">
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4"><i class="far fa-calendar-alt text-2xl"></i></div>
                     <h3 class="text-lg font-bold text-main mb-1">Google Calendar</h3>
-                    <p class="text-sm text-muted leading-relaxed">Jadual rasmi program sekolah dan mesyuarat jawatankuasa.</p>
+                    <p class="text-sm text-muted">Jadual rasmi program sekolah.</p>
                 </a>
-
-                <!-- App Card 3: Forms -->
-                <a href="https://drive.google.com/drive/folders/1LpCSdSH57VKGIdnIUW77XBEGtRH8bKdX?usp=sharing" target="_blank" rel="noopener noreferrer" class="bg-surface rounded-2xl border border-border p-6 flex flex-col justify-start shadow-sm hover:shadow-card hover-lift group fade-in-up delay-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-purple-600">
-                            <i class="fas fa-clipboard-list text-2xl"></i>
-                        </div>
-                        <i class="fas fa-external-link-alt text-gray-400 group-hover:text-primary transition-colors"></i>
-                    </div>
+                <a href="https://drive.google.com/drive/folders/1LpCSdSH57VKGIdnIUW77XBEGtRH8bKdX?usp=sharing" target="_blank" rel="noopener noreferrer" class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover:shadow-card hover-lift group">
+                    <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-purple-600 mb-4"><i class="fas fa-clipboard-list text-2xl"></i></div>
                     <h3 class="text-lg font-bold text-main mb-1">Google Forms</h3>
-                    <p class="text-sm text-muted leading-relaxed">Borang pendaftaran program, kaji selidik & kehadiran.</p>
+                    <p class="text-sm text-muted">Borang pendaftaran & kehadiran.</p>
                 </a>
-
-                <!-- App Card 4: Sheets -->
-                <a href="https://drive.google.com/drive/folders/1834oa42cntN2CRAsEBfBlOozC2NX6eeI?usp=sharing" target="_blank" rel="noopener noreferrer" class="bg-surface rounded-2xl border border-border p-6 flex flex-col justify-start shadow-sm hover:shadow-card hover-lift group fade-in-up delay-100">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center text-green-600">
-                            <i class="fas fa-file-excel text-2xl"></i>
-                        </div>
-                        <i class="fas fa-external-link-alt text-gray-400 group-hover:text-primary transition-colors"></i>
-                    </div>
+                <a href="https://drive.google.com/drive/folders/1834oa42cntN2CRAsEBfBlOozC2NX6eeI?usp=sharing" target="_blank" rel="noopener noreferrer" class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover:shadow-card hover-lift group">
+                    <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center text-green-600 mb-4"><i class="fas fa-file-excel text-2xl"></i></div>
                     <h3 class="text-lg font-bold text-main mb-1">Google Sheets</h3>
-                    <p class="text-sm text-muted leading-relaxed">Penyata kewangan, rekod sumbangan & belanjawan PIBG.</p>
-                </a>
-
-                <!-- App Card 5: Docs -->
-                <a href="https://drive.google.com/drive/folders/1HoUdrr2HBKIdsfPpWmqjczdOKqEsajdB?usp=sharing" target="_blank" rel="noopener noreferrer" class="bg-surface rounded-2xl border border-border p-6 flex flex-col justify-start shadow-sm hover:shadow-card hover-lift group fade-in-up delay-200">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-                            <i class="fas fa-file-alt text-2xl"></i>
-                        </div>
-                        <i class="fas fa-external-link-alt text-gray-400 group-hover:text-primary transition-colors"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-main mb-1">Google Docs</h3>
-                    <p class="text-sm text-muted leading-relaxed">Penyediaan surat pekeliling & minit mesyuarat kolaboratif.</p>
-                </a>
-
-                <!-- App Card 6: Photos -->
-                <a href="https://photos.app.goo.gl/exG3YVXD2qgLFgvq5" target="_blank" rel="noopener noreferrer" class="bg-surface rounded-2xl border border-border p-6 flex flex-col justify-start shadow-sm hover:shadow-card hover-lift group fade-in-up delay-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center text-yellow-600">
-                            <i class="fas fa-images text-2xl"></i>
-                        </div>
-                        <i class="fas fa-external-link-alt text-gray-400 group-hover:text-primary transition-colors"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-main mb-1">Google Photos</h3>
-                    <p class="text-sm text-muted leading-relaxed">Galeri album resolusi tinggi aktiviti dan program sekolah.</p>
-                </a>
-
-                <!-- App Card 7: Meet -->
-                <a href="https://meet.google.com" target="_blank" rel="noopener noreferrer" class="bg-surface rounded-2xl border border-border p-6 flex flex-col justify-start shadow-sm hover:shadow-card hover-lift group fade-in-up delay-100">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600">
-                            <i class="fas fa-video text-2xl"></i>
-                        </div>
-                        <i class="fas fa-external-link-alt text-gray-400 group-hover:text-primary transition-colors"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-main mb-1">Google Meet</h3>
-                    <p class="text-sm text-muted leading-relaxed">Mesyuarat maya AJK & sesi taklimat ibu bapa secara online.</p>
+                    <p class="text-sm text-muted">Rekod kewangan & belanjawan.</p>
                 </a>
             </div>
         </section>
 
-        <!-- Simple Dashboard -->
+        <!-- Dashboard Ringkas -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
             <div class="mb-8">
                 <h2 class="text-2xl font-bold text-main uppercase tracking-wide">DASHBOARD RINGKAS</h2>
@@ -365,12 +170,10 @@
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Metric 1: AJK Counter (Automated) -->
-                <div class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover-lift fade-in-up delay-100">
+                <!-- Metric 1: AJK Counter -->
+                <div class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover-lift">
                     <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
-                            <i class="fas fa-users text-2xl"></i>
-                        </div>
+                        <div class="w-14 h-14 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center"><i class="fas fa-users text-2xl"></i></div>
                         <div>
                             <p id="ajk-kpi-counter" class="text-3xl font-bold text-main">--</p>
                             <p class="text-xs font-bold text-muted uppercase tracking-wider mt-1">Ahli AJK</p>
@@ -379,83 +182,50 @@
                     </div>
                 </div>
 
-                <!-- Metric 2 -->
-                <div class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover-lift fade-in-up delay-200">
+                <!-- Metric 2: Program Counter -->
+                <div class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover-lift">
                     <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-full bg-green-50 text-green-600 flex items-center justify-center">
-                            <i class="fas fa-bookmark text-2xl"></i>
-                        </div>
+                        <div class="w-14 h-14 rounded-full bg-green-50 text-green-600 flex items-center justify-center"><i class="fas fa-bookmark text-2xl"></i></div>
                         <div>
-                            <p class="text-3xl font-bold text-main counter" data-target="12">12</p>
-                            <p class="text-xs font-bold text-muted uppercase tracking-wider">Program</p>
+                            <p id="program-kpi-counter" class="text-3xl font-bold text-main">--</p>
+                            <p class="text-xs font-bold text-muted uppercase tracking-wider mt-1">Program</p>
                             <p class="text-xs text-gray-400 mt-1">Tahun 2026</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Metric 3 -->
-                <div class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover-lift fade-in-up delay-300">
+                <!-- Metric 3: Mesyuarat -->
+                <div class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover-lift">
                     <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center">
-                            <i class="fas fa-users-cog text-2xl"></i>
-                        </div>
+                        <div class="w-14 h-14 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center"><i class="fas fa-users-cog text-2xl"></i></div>
                         <div>
                             <p class="text-3xl font-bold text-main counter" data-target="6">6</p>
-                            <p class="text-xs font-bold text-muted uppercase tracking-wider">Mesyuarat</p>
+                            <p class="text-xs font-bold text-muted uppercase tracking-wider mt-1">Mesyuarat</p>
                             <p class="text-xs text-gray-400 mt-1">Tahun 2026</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Metric 4 -->
-                <div class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover-lift fade-in-up delay-100">
+                <!-- Metric 4: Aktiviti Akan Datang -->
+                <div class="bg-surface rounded-2xl border border-border p-6 shadow-sm hover-lift">
                     <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center">
-                            <i class="fas fa-calendar-check text-2xl"></i>
-                        </div>
+                        <div class="w-14 h-14 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center"><i class="fas fa-calendar-check text-2xl"></i></div>
                         <div>
                             <p class="text-3xl font-bold text-main counter" data-target="4">4</p>
-                            <p class="text-xs font-bold text-muted uppercase tracking-wider">Aktiviti Akan Datang</p>
+                            <p class="text-xs font-bold text-muted uppercase tracking-wider mt-1">Aktiviti Akan Datang</p>
                             <p class="text-xs text-gray-400 mt-1">Dalam 3 Bulan</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- Footer -->
-    <footer class="bg-primary text-white py-10" id="gallery-section">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <div>
-                    <h3 class="text-lg font-bold mb-3">HUBUNGI KAMI</h3>
-                    <p class="text-sm text-gray-300 flex items-center gap-3">
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:pibgsemashoor@gmail.com" class="hover:text-secondary transition-colors">pibgsemashoor@gmail.com</a>
-                    </p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-3">PORTAL DIGITAL PIBG</h3>
-                    <p class="text-sm text-gray-300">Platform rasmi untuk pengurusan, komunikasi dan kolaborasi komuniti PIBG SMKA (P) Al-Mashoor.</p>
-                </div>
-                <div class="md:text-right">
-                    <h3 class="text-lg font-bold mb-3">VERSI</h3>
-                    <p class="text-sm text-gray-300">v1.0</p>
-                </div>
-            </div>
-            <div class="border-t border-white/10 pt-6">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400 text-center md:text-left">
-                    <div>
-                        <span class="font-bold text-gray-300">PIBG SMKA (P) Al-Mashoor</span><br>
-                        <span>Portal Digital Rasmi</span>
-                    </div>
-                    <div>
-                        &copy; 2026 Semua Hak Cipta Terpelihara.
-                    </div>
-                </div>
-            </div>
+    <footer class="bg-primary text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-gray-400 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div><span class="font-bold text-gray-300">PIBG SMKA (P) Al-Mashoor</span><br><span>Portal Digital Rasmi</span></div>
+            <div>&copy; 2026 Semua Hak Cipta Terpelihara.</div>
         </div>
     </footer>
 
@@ -463,11 +233,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             const nav = document.getElementById('main-nav');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
+                if (window.scrollY > 50) nav.classList.add('scrolled');
+                else nav.classList.remove('scrolled');
             });
 
             const btn = document.getElementById('mobile-menu-btn');
@@ -476,81 +243,9 @@
 
             btn.addEventListener('click', () => {
                 menu.classList.toggle('hidden');
-                if (menu.classList.contains('hidden')) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                } else {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                }
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
             });
-
-            menu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    menu.classList.add('hidden');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                });
-            });
-
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.fade-in-up').forEach((element) => {
-                observer.observe(element);
-            });
-
-            const counterObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counter = entry.target;
-                        const target = +counter.getAttribute('data-target');
-                        if (target) {
-                            const duration = 1500;
-                            const increment = target / (duration / 16);
-                            
-                            let current = 0;
-                            const updateCounter = () => {
-                                current += increment;
-                                if (current < target) {
-                                    counter.innerText = Math.ceil(current);
-                                    requestAnimationFrame(updateCounter);
-                                } else {
-                                    counter.innerText = target;
-                                }
-                            };
-                            updateCounter();
-                            observer.unobserve(counter);
-                        }
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.counter').forEach(counter => {
-                counterObserver.observe(counter);
-            });
-            
-            const WORKSPACE_CONFIG = {
-                driveUrl: "https://drive.google.com/drive/folders/18EMOWLL0l2R7Dk52XvPq1Vw7vdpB_Fwz?usp=sharing",
-                calendarUrl: "https://pibgsemashoor.github.io/pibg-portal/takwim.html",
-                formsUrl: "https://drive.google.com/drive/folders/1LpCSdSH57VKGIdnIUW77XBEGtRH8bKdX?usp=sharing",
-                sheetsUrl: "https://drive.google.com/drive/folders/1834oa42cntN2CRAsEBfBlOozC2NX6eeI?usp=sharing",
-                docsUrl: "https://drive.google.com/drive/folders/1HoUdrr2HBKIdsfPpWmqjczdOKqEsajdB?usp=sharing",
-                photosUrl: "https://photos.app.goo.gl/exG3YVXD2qgLFgvq5",
-                meetUrl: "https://meet.google.com"
-            };
 
             const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzKcCiFUYKuxtKhfOe5FF5w8dW-S8SvzMtaeK7bEz-56r9OIS-HN4VD2reF8-mm7tU4Vw/exec';
 
@@ -559,41 +254,26 @@
                 .then(data => {
                     console.log("Fetched Data:", data);
 
-                    // ==========================================
-                    // AUTOMATED AJK KPI LOGIC
-                    // ==========================================
+                    // AJK KPI Counter
                     const ajkCounter = document.getElementById('ajk-kpi-counter');
-                    if (data.totalAJK) {
-                        const target = parseInt(data.totalAJK, 10);
-                        const duration = 1500;
-                        const increment = target / (duration / 16);
-                        let current = 0;
-                        
-                        const updateAjk = () => {
-                            current += increment;
-                            if (current < target) {
-                                ajkCounter.innerText = Math.ceil(current);
-                                requestAnimationFrame(updateAjk);
-                            } else {
-                                ajkCounter.innerText = target;
-                            }
-                        };
-                        updateAjk();
+                    if (data.totalAJK !== undefined && data.totalAJK !== null) {
+                        ajkCounter.innerText = data.totalAJK;
                     } else {
-                        // Fail-safe requirement
-                        ajkCounter.classList.remove('text-3xl');
-                        ajkCounter.classList.add('text-sm', 'text-red-500');
+                        ajkCounter.className = "text-sm text-red-500 font-bold";
                         ajkCounter.innerText = "Data tidak dapat dimuatkan";
                     }
 
+                    // Program KPI Counter
+                    const programCounter = document.getElementById('program-kpi-counter');
+                    if (data.totalProgram !== undefined && data.totalProgram !== null) {
+                        programCounter.innerText = data.totalProgram;
+                    } else {
+                        programCounter.className = "text-sm text-red-500 font-bold";
+                        programCounter.innerText = "Data tidak dapat dimuatkan";
+                    }
+
                     if (!data.success || !data.events) return;
-
                     const rawEvents = data.events;
-
-                    // ==========================================
-                    // PENGUMUMAN TERKINI LOGIC (Rolling Window & Priority Sorting)
-                    // Window: Today - 7 days to Today + 7 days
-                    // ==========================================
                     const now = new Date();
                     
                     const windowStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
@@ -604,65 +284,29 @@
                         const evDate = new Date(ev.startTime);
                         if (isNaN(evDate.getTime())) return false;
                         if (ev.status && ev.status === 'CANCELLED') return false;
-                        
                         return evDate >= windowStart && evDate <= windowEnd;
-                    });
-
-                    // Priority sorting: upcoming events closest to today first, followed by recent past events
-                    eligibleAnnouncements.sort((a, b) => {
-                        const dateA = new Date(a.startTime);
-                        const dateB = new Date(b.startTime);
-                        const diffA = dateA - now;
-                        const diffB = dateB - now;
-
-                        const isFutureA = diffA >= 0;
-                        const isFutureB = diffB >= 0;
-
-                        if (isFutureA && isFutureB) {
-                            return diffA - diffB; // closest upcoming first
-                        } else if (!isFutureA && !isFutureB) {
-                            return diffB - diffA; // most recent past first
-                        } else {
-                            return isFutureA ? -1 : 1; // upcoming prioritized over past
-                        }
                     });
 
                     const topAnnouncements = eligibleAnnouncements.slice(0, 3);
                     const announceContainer = document.getElementById('dynamic-announcement-container');
 
                     if (announceContainer && topAnnouncements.length > 0) {
-                        announceContainer.innerHTML = topAnnouncements.map((announcementEvent, index) => {
-                            const evDate = new Date(announcementEvent.startTime);
+                        announceContainer.innerHTML = topAnnouncements.map((ev, index) => {
+                            const evDate = new Date(ev.startTime);
                             const dateString = evDate.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
-                            const timeString = announcementEvent.isAllDay ? 'Sepanjang Hari' : evDate.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit' });
-                            const isFirst = index === 0;
-
+                            const timeString = ev.isAllDay ? 'Sepanjang Hari' : evDate.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit' });
                             return `
-                                <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 ${isFirst ? '' : 'mt-4'}">
+                                <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 ${index === 0 ? '' : 'mt-4'}">
                                     <div class="flex items-center gap-3 mb-4">
-                                        <span class="bg-secondary text-primary text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">RASMI</span>
-                                        <h4 class="text-lg font-bold text-main">${announcementEvent.title}</h4>
+                                        <span class="bg-secondary text-primary text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">RASMI</span>
+                                        <h4 class="text-lg font-bold text-main">${ev.title}</h4>
                                     </div>
-                                    <div class="space-y-2.5 text-sm text-gray-600 mb-6 font-medium">
-                                        <div class="flex items-center gap-3">
-                                            <i class="far fa-calendar text-gray-400 w-4 text-center"></i> 
-                                            <span>${dateString}</span>
-                                        </div>
-                                        <div class="flex items-center gap-3">
-                                            <i class="far fa-clock text-gray-400 w-4 text-center"></i> 
-                                            <span>${timeString}</span>
-                                        </div>
-                                        ${announcementEvent.location ? `
-                                        <div class="flex items-start gap-3">
-                                            <i class="fas fa-map-marker-alt text-gray-400 w-4 text-center mt-0.5"></i> 
-                                            <span>${announcementEvent.location}</span>
-                                        </div>` : ''}
+                                    <div class="space-y-2 text-sm text-gray-600 mb-4">
+                                        <div><i class="far fa-calendar text-gray-400 w-4"></i> ${dateString}</div>
+                                        <div><i class="far fa-clock text-gray-400 w-4"></i> ${timeString}</div>
+                                        ${ev.location ? `<div><i class="fas fa-map-marker-alt text-gray-400 w-4"></i> ${ev.location}</div>` : ''}
                                     </div>
-                                    ${announcementEvent.description ? `<p class="text-sm text-gray-600 mb-6 leading-relaxed">${announcementEvent.description}</p>` : ''}
-                                    <a href="takwim.html" class="bg-primary hover:bg-primary-light text-white text-sm font-semibold py-2.5 px-6 rounded-lg transition-colors shadow-sm inline-flex items-center gap-2">
-                                        <span>Lihat Takwim Penuh</span>
-                                        <i class="fas fa-chevron-right text-xs"></i>
-                                    </a>
+                                    <a href="takwim.html" class="bg-primary text-white text-sm font-semibold py-2 px-4 rounded-lg inline-flex items-center gap-2">Lihat Takwim Penuh <i class="fas fa-chevron-right text-xs"></i></a>
                                 </div>
                             `;
                         }).join('');
@@ -670,65 +314,37 @@
                         announceContainer.innerHTML = `<p class="text-xs text-gray-400 italic">Tiada pengumuman rasmi buat masa ini.</p>`;
                     }
 
-                    // ==========================================
-                    // AKTIVITI AKAN DATANG LOGIC (Relative to Latest Announcement Date)
-                    // ==========================================
-                    let latestAnnouncementDate = now; // fallback
-                    if (topAnnouncements.length > 0) {
-                        const announcementDates = topAnnouncements.map(ev => new Date(ev.startTime).getTime());
-                        latestAnnouncementDate = new Date(Math.max(...announcementDates));
-                    }
-
-                    const activityStartDate = new Date(latestAnnouncementDate.getTime());
-                    activityStartDate.setDate(activityStartDate.getDate() + 1);
-                    activityStartDate.setHours(0, 0, 0, 0);
-
-                    const activityEndDate = new Date(activityStartDate.getFullYear(), activityStartDate.getMonth() + 3, activityStartDate.getDate());
-                    activityEndDate.setHours(23, 59, 59, 999);
-
-                    const eligibleActivities = rawEvents.filter(ev => {
-                        if (!ev.startTime) return false;
-                        const evDate = new Date(ev.startTime);
-                        if (isNaN(evDate.getTime())) return false;
-                        if (ev.status && ev.status === 'CANCELLED') return false;
-
-                        return evDate > latestAnnouncementDate && evDate <= activityEndDate;
-                    });
-
-                    eligibleActivities.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
-
+                    // Aktiviti Akan Datang
                     const eventsContainer = document.getElementById('dynamic-events-container');
                     if (eventsContainer) {
+                        const eligibleActivities = rawEvents.filter(ev => {
+                            if (!ev.startTime) return false;
+                            const evDate = new Date(ev.startTime);
+                            return evDate > now && evDate <= new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000);
+                        }).slice(0, 4);
+
                         if (eligibleActivities.length > 0) {
                             eventsContainer.innerHTML = eligibleActivities.map(ev => {
                                 const evDate = new Date(ev.startTime);
-                                const dayNum = evDate.getDate();
-                                const monthShort = evDate.toLocaleDateString('ms-MY', { month: 'short' }).toUpperCase();
-                                const timeStr = evDate.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit' });
-
                                 return `
-                                    <div class="flex items-start gap-4 pb-4 border-b border-gray-100 last:border-0 last:pb-0 group">
-                                        <div class="bg-primary rounded-xl text-center flex-shrink-0 w-14 overflow-hidden flex flex-col shadow-sm">
-                                            <div class="text-white text-lg font-bold py-1 bg-primary leading-tight">${dayNum}</div>
-                                            <div class="text-primary-light text-[9px] font-bold uppercase tracking-wider bg-white py-1 border-t border-gray-100">${monthShort}</div>
+                                    <div class="flex items-start gap-4 pb-4 border-b border-gray-100 last:border-0">
+                                        <div class="bg-primary rounded-xl text-center flex-shrink-0 w-14 py-1 text-white font-bold">
+                                            <div class="text-lg">${evDate.getDate()}</div>
+                                            <div class="text-[9px] uppercase bg-white text-primary py-0.5">${evDate.toLocaleDateString('ms-MY', { month: 'short' })}</div>
                                         </div>
-                                        <div class="flex-grow pt-0.5">
+                                        <div>
                                             <h4 class="text-sm font-bold text-main mb-1">${ev.title}</h4>
-                                            <p class="text-xs text-muted font-medium">${timeStr} ${ev.location ? '| ' + ev.location : ''}</p>
-                                        </div>
-                                        <div class="text-gray-300 pt-1">
-                                            <i class="far fa-calendar-plus"></i>
+                                            <p class="text-xs text-muted">${evDate.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit' })} ${ev.location ? '| ' + ev.location : ''}</p>
                                         </div>
                                     </div>
                                 `;
                             }).join('');
                         } else {
-                            eventsContainer.innerHTML = `<p class="text-xs text-gray-400 italic">Tiada aktiviti akan datang dalam masa terdekat.</p>`;
+                            eventsContainer.innerHTML = `<p class="text-xs text-gray-400 italic">Tiada aktiviti akan datang.</p>`;
                         }
                     }
                 })
-                .catch(err => console.error('Error fetching dynamic data:', err));
-
+                .catch(err => console.error('Fetch error:', err));
         });
     </script>
 </body>
